@@ -8,7 +8,7 @@ import java.util.Objects;
  * Contains methods to interact with the data base.
  * Created by Daniel Hammerin 10-11-2015.
  */
-public class SQLDAO {
+public class DB {
 
     private static ArrayList<Game> savedGames = new ArrayList<>();
 
@@ -20,10 +20,13 @@ public class SQLDAO {
         savedGames.add(game);
     }
 
-    public Game loadGame() {
-        Game game;
+    public Game loadGame(String gameName) {
+        Game game = null;
         for (Game g : savedGames ) {
-            if (g.)
+            if (g.name.equals(gameName)) {
+                game = g;
+                return game;
+            }
         }
         return game;
     }

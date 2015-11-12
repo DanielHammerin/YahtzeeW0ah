@@ -20,4 +20,19 @@ public class mainview {
         String ret = sc.nextLine();
         return ret;
     }
+
+    public void displayMessages(String in) {
+        if (in.equals("enterNplayers")) {
+            System.out.println("Please enter number of players. (1-5)");
+        }
+        else if (in.equals("notAvalidInput")) {
+            System.out.println("Not a valid input please try again.");
+        }
+        else if (in.equals("enterNewGameName")) {
+            System.out.println("Enter the name of the new game session.");
+        }
+        else if (in.equals("enterSavedGameName")) {
+            System.out.println("Enter the name of your saved game.");
+        }
+    }
 }

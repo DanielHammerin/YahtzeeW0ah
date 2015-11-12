@@ -7,10 +7,23 @@ import java.util.ArrayList;
  */
 public class Game {
 
-    private String name;
+    public String name;
+    public int numberOfPlayers;
     private ArrayList<Player> players = new ArrayList<>();
 
 
 
-    public
+    public int[] rollHand() {
+        Dice d = new Dice();
+        int[] hand = d.roll();
+        return hand;
+    }
+
+    public void addPlayers(ArrayList<Player> arr) {            //Add players to game player list.
+        for (Player p : arr) {
+            players.add(p);
+        }
+    }
+
+
 }
