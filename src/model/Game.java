@@ -9,7 +9,7 @@ public class Game {
 
     public String name;
     public int numberOfPlayers;
-    private ArrayList<Player> players = new ArrayList<>();
+    public ArrayList<Player> players = new ArrayList<>();
 
 
 

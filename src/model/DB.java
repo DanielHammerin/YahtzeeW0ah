@@ -20,7 +20,7 @@ public class DB {
         savedGames.add(game);
     }
 
-    public Game loadGame(String gameName) {
+    public static Game loadGame(String gameName) {
         Game game = null;
         for (Game g : savedGames ) {
             if (g.name.equals(gameName)) {
