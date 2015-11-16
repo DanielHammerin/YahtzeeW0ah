@@ -15,7 +15,7 @@ public class StandardYahtzeeRules {
     Game game = new Game();
 
 
-    private int[] Sort(Dice[] dice){
+    private int[] Sort(int[] dice){
 
         int one = 0;
         int two = 0;
@@ -58,7 +58,7 @@ public class StandardYahtzeeRules {
         return numb;
     }
 
-    private boolean ThreeOfKind(Dice[] dice){
+    private boolean ThreeOfKind(int[] dice){
 
         boolean res = false;
 
@@ -75,7 +75,7 @@ public class StandardYahtzeeRules {
 
 
 
-    private boolean FourOfKind(Dice[] dice){
+    private boolean FourOfKind(int[] dice){
 
         boolean res = false;
         int [] scores  = Sort(dice);
@@ -85,11 +85,11 @@ public class StandardYahtzeeRules {
         if(scores[0]== 4 || scores[1]== 4 || scores[2]== 4 || scores[3]== 4 || scores[4]== 4 || scores[5]== 4){
             res = true;
         }
-        return(scores[0]== 4 || scores[1]== 4 || scores[2]== 4 || scores[3]== 4 || scores[4]== 4 || scores[5]== 4);
+    return res;
     }
 
 
-    private boolean Yahtzee(Dice[] dice){
+    private boolean Yahtzee(int[] dice){
 
         int [] scores  = Sort(dice);
         boolean res = false;
@@ -102,7 +102,7 @@ public class StandardYahtzeeRules {
     }
 
 
-    private boolean Straight(Dice[] dice){
+    private boolean Straight(int[] dice){
 
         boolean res = false;
 
@@ -118,7 +118,7 @@ public class StandardYahtzeeRules {
         return res;
     }
 
-    private boolean smallStraight(Dice[] dice){
+    private boolean smallStraight(int[] dice){
 
         boolean res = false;
         int [] scores = Sort(dice);
@@ -133,7 +133,7 @@ public class StandardYahtzeeRules {
     }
 
 
-    private boolean fullHouse(Dice [] dice){
+    private boolean fullHouse(int [] dice){
 
         boolean res = false;
         int [] scores = Sort(dice);

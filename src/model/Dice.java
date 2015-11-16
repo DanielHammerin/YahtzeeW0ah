@@ -8,24 +8,12 @@ package model;
 public class Dice {
 
 
-    private int id;
 
-    private int tal;
-
-
-    public Dice(int id){
-
-        tal = (int) (Math.random()*6 +1);
-        this.id = id;
-    }
-
-
-
-    public void roll() {
-
+    public int roll() {
+        int tal;
         tal = (int) (Math.random()*6) +1;
+        return tal;
     }
 
-    public int getTal(){return tal;}
-    public int getId(){return id;}
+
 }
