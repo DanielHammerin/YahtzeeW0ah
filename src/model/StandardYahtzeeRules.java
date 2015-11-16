@@ -69,6 +69,7 @@ public class StandardYahtzeeRules {
         if(scores[0]== 3 || scores[1]== 3 || scores[2]== 3 || scores[3]== 3 || scores[4]== 3 || scores[5]== 3)
         {
             res = true;
+
         }
         return res;
     }
