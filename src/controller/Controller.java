@@ -60,6 +60,7 @@ public class Controller {
             String newPlayerName = mv.getInput();
             newPlayer.setName(newPlayerName);               //Set new player name.
             playerList.add(newPlayer);                      //Add player to arraylist of players.
+            n++;
         }
         newGame.addPlayers(playerList);                        //Add playerList to Game player list.
         commandControll(newGame);                              //Call main program with new game.

@@ -3,6 +3,7 @@ package view;
 import model.Player;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -11,28 +12,83 @@ import java.util.Scanner;
 public class mainview {
 
     public void displayMainScoreBoard(ArrayList<Player> playerList) {
-        int player = playerList.size();
-        new Columns()
-                .addLine("X", "| Name |", "|", playerList.get(playerList.size()).getName(), "|",)
-        System.out.println("Name");
-            System.out.println();
-        System.out.println("Ones");
-        System.out.println("Twos");
-        System.out.println("Threes");
-        System.out.println("Fours");
-        System.out.println("Fives");
-        System.out.println("Sixes");
-            System.out.println();
-        System.out.println("Three of a kind");
-        System.out.println("Four of a kind");
-        System.out.println("Full House");
-        System.out.println("Small Straight");
-        System.out.println("Large Straight");
-        System.out.println("Chance");
-        System.out.println("Yahtzee");
-            System.out.println();
-        System.out.println("Total Score");
+        /*
+         * ArrayLists inside method so they are cleared (new ones made) every time the method is called.
+         */
+        List<String> Name = new ArrayList<>();
+        List<String> Ones = new ArrayList<>();
+        List<String> Twos = new ArrayList<>();
+        List<String> Threes = new ArrayList<>();
+        List<String> Fours = new ArrayList<>();
+        List<String> Fives = new ArrayList<>();
+        List<String> Sixes = new ArrayList<>();
 
+        List<String> Threeofakind = new ArrayList<>();
+        List<String> Fourofakind = new ArrayList<>();
+        List<String> Fullhouse = new ArrayList<>();
+        List<String> Smallstraight = new ArrayList<>();
+        List<String> Largestraight = new ArrayList<>();
+        List<String> Chance = new ArrayList<>();
+        List<String> Yahtzee = new ArrayList<>();
+
+        List<String> Totalscore = new ArrayList<>();
+
+        for (Player p : playerList) {                           //For every player, append their category data.
+            Name.add(p.getName());
+            Ones.add(String.valueOf(p.getOnes()));
+            Twos.add(String.valueOf(p.getTwos()));
+            Threes.add(String.valueOf(p.getThrees()));
+            Fours.add(String.valueOf(p.getFours()));
+            Fives.add(String.valueOf(p.getFives()));
+            Sixes.add(String.valueOf(p.getSixes()));
+
+            Threeofakind.add(String.valueOf(p.getThreeofakind()));
+            Fourofakind.add(String.valueOf(p.getFourofakind()));
+            Fullhouse.add(String.valueOf(p.getFullhouse()));
+            Smallstraight.add(String.valueOf(p.getSmallstraight()));
+            Largestraight.add(String.valueOf(p.getLargestraight()));
+            Chance.add(String.valueOf(p.getChance()));
+            Yahtzee.add(String.valueOf(p.getYahtzee()));
+            Totalscore.add(String.valueOf(p.getTotalscore()));
+        }
+
+        System.out.println("| Name            " + stringBuilder(Name));
+        System.out.println("| Ones            " + stringBuilder(Ones));
+        System.out.println("| Twos            " + stringBuilder(Twos));
+        System.out.println("| Threes          " + stringBuilder(Threes));
+        System.out.println("| Fours           " + stringBuilder(Fours));
+        System.out.println("| Fives           " + stringBuilder(Fives));
+        System.out.println("| Sixes           " + stringBuilder(Sixes));
+        System.out.println("| Three of a kind " + stringBuilder(Threeofakind));
+        System.out.println("| Four of a kind  " + stringBuilder(Fourofakind));
+        System.out.println("| Full House      " + stringBuilder(Fullhouse));
+        System.out.println("| Small Straight  " + stringBuilder(Smallstraight));
+        System.out.println("| Large Straight  " + stringBuilder(Largestraight));
+        System.out.println("| Chance          " + stringBuilder(Chance));
+        System.out.println("| Yahtzee         " + stringBuilder(Yahtzee));
+        System.out.println("| Total Score     " + stringBuilder(Totalscore));
+
+    }
+    public String stringBuilder(List<String> arrIn) {
+        StringBuilder sb = new StringBuilder();
+        for (String s : arrIn) {
+            sb.append("|");
+            sb.append(s);
+            sb.append(pad(s));
+        }
+        return sb.toString();
+    }
+
+    public String pad(String s) {
+        int space = 15;
+        int sLength = s.length();
+        String retPad = "";
+        int temp = space - sLength;
+
+        for (int i = 0; i <= temp ; i++) {
+            retPad += " ";
+        }
+        return retPad;
     }
 
     public void displayStart() {
