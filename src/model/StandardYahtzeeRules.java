@@ -118,5 +118,33 @@ public class StandardYahtzeeRules {
         return res;
     }
 
+    private boolean smallStraight(Dice[] dice){
 
+        boolean res = false;
+        int [] scores = Sort(dice);
+
+       // StandardYahtzeeRules.Sort(scores);
+
+
+        if((scores[5] == scores[5]+1) &&(scores[4] == scores[3]+1) && (scores[3] == scores[2]+1)){
+            res = true;
+        }
+        return res;
+    }
+
+
+    private boolean fullHouse(Dice [] dice){
+
+        boolean res = false;
+        int [] scores = Sort(dice);
+
+        // StandardYahtzeeRules.Sort(scores);
+
+        if(scores[5] == 3 && scores[4] == 2)
+        {
+            res = true;
+        }
+
+        return res;
+    }
 }
