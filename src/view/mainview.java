@@ -7,10 +7,16 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Created by Daniel on 2015-11-10.
+ * Created by Daniel Hammerin on 2015-11-10.
  */
 public class mainview {
 
+    public void displayCommands() {
+        System.out.println("To roll, press:   'R'");
+        System.out.println("The roll will be displayed as a series of numbers.");
+        System.out.println("Enter the number(s) you wish to save.");
+        System.out.println("Then press 'R' again to re-roll all unselected dices.");
+    }
     public void displayMainScoreBoard(ArrayList<Player> playerList) {
         /*
          * ArrayLists inside method so they are cleared (new ones made) every time the method is called.
@@ -52,23 +58,27 @@ public class mainview {
             Totalscore.add(String.valueOf(p.getTotalscore()));
         }
 
-        System.out.println("| Name            " + stringBuilder(Name));
-        System.out.println("| Ones            " + stringBuilder(Ones));
-        System.out.println("| Twos            " + stringBuilder(Twos));
-        System.out.println("| Threes          " + stringBuilder(Threes));
-        System.out.println("| Fours           " + stringBuilder(Fours));
-        System.out.println("| Fives           " + stringBuilder(Fives));
-        System.out.println("| Sixes           " + stringBuilder(Sixes));
-        System.out.println("| Three of a kind " + stringBuilder(Threeofakind));
-        System.out.println("| Four of a kind  " + stringBuilder(Fourofakind));
-        System.out.println("| Full House      " + stringBuilder(Fullhouse));
-        System.out.println("| Small Straight  " + stringBuilder(Smallstraight));
-        System.out.println("| Large Straight  " + stringBuilder(Largestraight));
-        System.out.println("| Chance          " + stringBuilder(Chance));
-        System.out.println("| Yahtzee         " + stringBuilder(Yahtzee));
-        System.out.println("| Total Score     " + stringBuilder(Totalscore));
+        System.out.println("|   | Name            " + stringBuilder(Name));
+        System.out.println("|1. | Ones            " + stringBuilder(Ones));
+        System.out.println("|2. | Twos            " + stringBuilder(Twos));
+        System.out.println("|3. | Threes          " + stringBuilder(Threes));
+        System.out.println("|4. | Fours           " + stringBuilder(Fours));
+        System.out.println("|5. | Fives           " + stringBuilder(Fives));
+        System.out.println("|6. | Sixes           " + stringBuilder(Sixes));
+        System.out.println("|7. | Three of a kind " + stringBuilder(Threeofakind));
+        System.out.println("|8. | Four of a kind  " + stringBuilder(Fourofakind));
+        System.out.println("|9. | Full House      " + stringBuilder(Fullhouse));
+        System.out.println("|1. | Small Straight  " + stringBuilder(Smallstraight));
+        System.out.println("|11.| Large Straight  " + stringBuilder(Largestraight));
+        System.out.println("|12.| Chance          " + stringBuilder(Chance));
+        System.out.println("|13.| Yahtzee         " + stringBuilder(Yahtzee));
+        System.out.println("|   | Total Score     " + stringBuilder(Totalscore));
 
     }
+
+    /*
+     * Method for creating the lines for the scoreboard.
+     */
     public String stringBuilder(List<String> arrIn) {
         StringBuilder sb = new StringBuilder();
         for (String s : arrIn) {
@@ -79,6 +89,9 @@ public class mainview {
         return sb.toString();
     }
 
+    /*
+     * Method for padding the spaces between columns.
+     */
     public String pad(String s) {
         int space = 15;
         int sLength = s.length();
@@ -91,12 +104,17 @@ public class mainview {
         return retPad;
     }
 
-    public void displayStart() {
-        System.out.println("Start new game? 'n' or Load existing session? 'l'");
+    public void displayRoll(ArrayList<Integer> arrOut) {
+        StringBuilder sb = new StringBuilder();
+        for (int i : arrOut) {
+            sb.append(i).toString();
+            sb.append(", ");
+        }
+        System.out.println("Rolled numbers: " + sb.toString());
     }
 
-    public void displaySelectPlayers() {
-        System.out.println("Select number of players: (1-5)");
+    public void displayStart() {
+        System.out.println("Start new game? 'n' or Load existing session? 'l'");
     }
 
     public String getInput() {
@@ -121,7 +139,14 @@ public class mainview {
         else if(in.equals("enterplayername")) {
             System.out.println("Enter ");
         }
+        else if (in.equals("choosedicestokeep")) {
+            System.out.println("Choose which dices you wish to keep. (Enter their actual number)");
+        }
+        else if (in.equals("rollorscore")) {
+            System.out.println("Do you wish to score or roll again? R/S");
+        }
     }
+
     public void displayAddNewPlayer(int n) {
         if (n == 0) {
             System.out.println("Enter first players name:");
@@ -138,5 +163,13 @@ public class mainview {
         else if (n == 4) {
             System.out.println("Enter last players name:");
         }
+    }
+
+    public void displaySavedDices(int[] finalHand) {
+        StringBuilder sb = new StringBuilder();
+        for (int i : finalHand) {
+            sb.append(i);
+        }
+        System.out.println("Saved dices: " + sb.toString());
     }
 }

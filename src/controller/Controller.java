@@ -1,6 +1,7 @@
 package controller;
 
 import model.DB;
+import model.Dice;
 import model.Game;
 import model.Player;
 import view.mainview;
@@ -9,13 +10,18 @@ import java.util.ArrayList;
 
 
 /**
- * Created by Daniel on 2015-11-10.
+ * Created by Daniel Hammerin on 2015-11-10.
  */
 public class Controller {
 
 
     mainview mv = new mainview();
+    String cmd = mv.getInput();
 
+    int nRolls;
+    ArrayList<Integer> rollingHand;
+    int[] finalHand = new int[5];
+    int finalArrIndex;
 
     public void startNewGame() {
         mv.displayStart();
@@ -34,10 +40,82 @@ public class Controller {
 
     public boolean commandControll(Game game) {
         while (true) {
+            mv.displayCommands();
             mv.displayMainScoreBoard(game.players);
-            String cmd = mv.getInput();
+
+            if (cmd.equals("r")) {
+                nRolls = 0;
+                finalArrIndex = 0;
+                Player p = game.getPlayer();
+                rolling(game, p);
+            }
+            else if (cmd.equals("l")) {
+
+            }
+            else if (cmd.equals("s")) {
+
+            }
+            else {
+                mv.displayMessages("notAvalidInput");
+            }
         }
     }
+
+    public void rolling(Game game, Player p) {
+        mv.displayMainScoreBoard(game.players);
+        mv.displaySavedDices(finalHand);
+        mv.displayRoll(rollingHand);
+        mv.displayMessages("rollorscore");
+        String cmdIn = cmd.toLowerCase();
+
+        if (cmdIn.equals("r")) {                            //If player wants to roll.
+            if (nRolls == 0) {
+                rollingHand = game.rollNewhand();           //RollingHand is an arrayList.
+                nRolls++;
+                rolling(game, p);
+            } else if (nRolls > 0 && nRolls < 4) {
+                if (nRolls == 3) {                          //If player has rolled 3 times.
+                    for (int i : rollingHand) {
+                        finalHand[finalArrIndex] = i;
+                        finalArrIndex++;
+                    }
+                    selectCategoryToScore(finalHand, p, game);       //Go to score selection part.
+                } else {
+                    mv.displayMessages("choosedicestokeep");
+                    String in = cmd;                            //String of dices to keep.
+
+                    for (char c : in.toCharArray()) {           //For every char in the input string.
+                        int x = Character.getNumericValue(c);   //Set x to char value.
+                        for (int i : rollingHand) {             //Check the rolled hand.
+                            if (x == i) {                       //If x matches any of the numbers rolled.
+                                finalHand[finalArrIndex] = i;   //Put x in the intArray finalHand[]
+                                rollingHand.remove(i);          //remove it from the arrayList of rolling dices.
+                                finalArrIndex++;                //Increase index in intArray.
+                            }
+                        }
+                    }
+                    rollingHand = game.rollHand(rollingHand);   //Re-roll remaining dices.
+                    rolling(game, p);
+                }
+            }
+        }
+        else if (cmdIn.equals("s")) {               //If player wants to score.
+            for (int i : rollingHand) {             //Put all dices to saved hand.
+                finalHand[finalArrIndex] = i;
+                finalArrIndex++;
+            }
+            selectCategoryToScore(finalHand, p, game);       //Go to score selection part.
+        }
+        else {
+            mv.displayMessages("notAvalidInput");
+            rolling(game, p);
+        }
+    }
+
+    public void selectCategoryToScore(int[] finalHand, Player p, Game g) {        //Directs user to score part or w/e...
+        ArrayList<Boolean> selection = g.possibleCategories(finalHand);
+    }
+
     /*
      * Method for creating a new game with n Players.
      */

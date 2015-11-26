@@ -15,7 +15,7 @@ public class StandardYahtzeeRules {
     Game game = new Game();
 
 
-    private int[] Sort(int[] dice){
+    private int[] Sort(int[] dice){             //Takes in final hand of dices.
 
         int one = 0;
         int two = 0;
@@ -24,37 +24,28 @@ public class StandardYahtzeeRules {
         int five = 0;
         int six = 0;
 
-        for(int i = 0; i < dice.length; i++){
-            if(dice[i] == 1)
-            {
+        for(int i = 0; i < dice.length; i++){   //Sets variables depending on which rolled numbers are present.
+            if(dice[i] == 1) {
                 one++;
             }
-            if(dice[i] == 2)
-            {
+            if(dice[i] == 2) {
                 two++;
             }
-
-            if(dice[i] == 3)
-            {
+            if(dice[i] == 3) {
                 three++;
             }
-            if(dice[i] == 4)
-            {
+            if(dice[i] == 4) {
                 four++;
             }
-            if(dice[i] == 5)
-            {
+            if(dice[i] == 5) {
                 five++;
             }
-            if(dice[i] == 6)
-            {
+            if(dice[i] == 6) {
                 six++;
             }
-
-
         }
 
-        int [] numb = new int [] {one, two, three, four, five, six};
+        int[] numb = new int [] {one, two, three, four, five, six};             //Put all variables in a new int[]
         return numb;
     }
 
@@ -62,7 +53,7 @@ public class StandardYahtzeeRules {
 
         boolean res = false;
 
-        int [] scores  = Sort(dice);
+        int[] scores  = Sort(dice);
 
         score = (1*scores [0])+(2*scores [1]) +(2*scores [1])+(3*scores [2])+(4*scores [3])+(5*scores [4])+(5*scores[6]);
 
@@ -79,7 +70,7 @@ public class StandardYahtzeeRules {
     private boolean FourOfKind(int[] dice){
 
         boolean res = false;
-        int [] scores  = Sort(dice);
+        int[] scores  = Sort(dice);
 
         score = (1*scores [0])+(2*scores [1]) +(2*scores [1])+(3*scores [2])+(4*scores [3])+(5*scores [4])+(5*scores[6]);
 
@@ -92,7 +83,7 @@ public class StandardYahtzeeRules {
 
     private boolean Yahtzee(int[] dice){
 
-        int [] scores  = Sort(dice);
+        int[] scores  = Sort(dice);
         boolean res = false;
 
         if(scores[0]== 5 || scores[1]== 5 || scores[2]== 5 || scores[3]== 5 || scores[4]== 5 || scores[5]== 5){
@@ -122,7 +113,7 @@ public class StandardYahtzeeRules {
     private boolean smallStraight(int[] dice){
 
         boolean res = false;
-        int [] scores = Sort(dice);
+        int[] scores = Sort(dice);
 
        // StandardYahtzeeRules.Sort(scores);
 
@@ -137,7 +128,7 @@ public class StandardYahtzeeRules {
     private boolean fullHouse(int [] dice){
 
         boolean res = false;
-        int [] scores = Sort(dice);
+        int[] scores = Sort(dice);
 
         // StandardYahtzeeRules.Sort(scores);
 

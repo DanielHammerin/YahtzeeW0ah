@@ -1,7 +1,9 @@
 package model;
 
+import java.util.ArrayList;
+
 /**
- * Created by Daniel on 2015-11-10.
+ * Created by Daniel Hammerin on 2015-11-10.
  */
 public class Player {
 
