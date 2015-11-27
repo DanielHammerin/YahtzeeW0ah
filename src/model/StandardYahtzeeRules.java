@@ -1,5 +1,8 @@
 package model;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * Created by Markus on 12/11/15.
  */
@@ -7,13 +10,32 @@ public class StandardYahtzeeRules {
 
     private int score;
 
+    public int getScore(){
+        return score;
+    }
 
+    /*
+     * Method for checking which categories are scorable.
+     */
+    public ArrayList<Boolean> getCategories(int[] finalHand) {
+        ArrayList<Boolean> categories = new ArrayList<>();
 
-    public int getScore(){return score;}
+        categories.add(Ones(finalHand));                                   //Adding them to the return list.
+        categories.add(Twos(finalHand));
+        categories.add(Threes(finalHand));
+        categories.add(Fours(finalHand));
+        categories.add(Fives(finalHand));
+        categories.add(Sixes(finalHand));
+        categories.add(ThreeOfKind(finalHand));
+        categories.add(FourOfKind(finalHand));
+        categories.add(fullHouse(finalHand));
+        categories.add(smallStraight(finalHand));
+        categories.add(Straight(finalHand));
+        categories.add(Chance(finalHand));
+        categories.add(Yahtzee(finalHand));
 
-
-    Game game = new Game();
-
+        return categories;
+    }
 
     private int[] Sort(int[] dice){             //Takes in final hand of dices.
 
@@ -49,17 +71,68 @@ public class StandardYahtzeeRules {
         return numb;
     }
 
-    private boolean OnesTwosEtc(int[] dice, int[] numb){
+    private boolean Ones(int[] dice){
         boolean res = false;
-        int sum = 0;
+
         for(int i = 0; i < 5; i++){
-            if(dice[i]== numb[i]){
-                sum += numb[i];
+            if(dice[i]== 1){
                 res = true;
             }
         }
         return res;
     }
+
+    private boolean Twos(int[] dice){
+        boolean res = false;
+
+        for(int i = 0; i < 5; i++){
+            if(dice[i]== 2){
+                res = true;
+            }
+        }
+        return res;
+    }
+    private boolean Threes(int[] dice){
+        boolean res = false;
+
+        for(int i = 0; i < 5; i++){
+            if(dice[i]== 3){
+                res = true;
+            }
+        }
+        return res;
+    }
+    private boolean Fours(int[] dice){
+        boolean res = false;
+
+        for(int i = 0; i < 5; i++){
+            if(dice[i]== 4){
+                res = true;
+            }
+        }
+        return res;
+    }
+    private boolean Fives(int[] dice){
+        boolean res = false;
+
+        for(int i = 0; i < 5; i++){
+            if(dice[i]== 5){
+                res = true;
+            }
+        }
+        return res;
+    }
+    private boolean Sixes(int[] dice){
+        boolean res = false;
+
+        for(int i = 0; i < 5; i++){
+            if(dice[i]== 6){
+                res = true;
+            }
+        }
+        return res;
+    }
+
     private boolean ThreeOfKind(int[] dice){
 
         boolean res = false;

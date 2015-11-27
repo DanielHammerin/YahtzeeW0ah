@@ -20,7 +20,7 @@ public class Controller {
 
     int nRolls;
     ArrayList<Integer> rollingHand;
-    int[] finalHand = new int[5];
+    int[] finalHand;
     int finalArrIndex;
 
     public void startNewGame() {
@@ -43,16 +43,17 @@ public class Controller {
             mv.displayCommands();
             mv.displayMainScoreBoard(game.players);
 
-            if (cmd.equals("r")) {
+            if (cmd.equals("r")) {              //Reset for the next player.
                 nRolls = 0;
                 finalArrIndex = 0;
+                finalHand = new int[5];
                 Player p = game.getPlayer();
                 rolling(game, p);
             }
-            else if (cmd.equals("l")) {
+            else if (cmd.equals("l")) {         //Load another game.
 
             }
-            else if (cmd.equals("s")) {
+            else if (cmd.equals("s")) {         //Save game.
 
             }
             else {
@@ -154,6 +155,12 @@ public class Controller {
         commandControll(loadedGame);                        //Call main program with loaded game
     }
 
+    public void loadAnotherGame() {
 
+    }
+
+    public void saveGame() {
+
+    }
 
 }

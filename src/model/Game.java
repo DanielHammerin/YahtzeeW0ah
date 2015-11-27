@@ -11,6 +11,7 @@ public class Game {
     public int numberOfPlayers;
     public ArrayList<Player> players = new ArrayList<>();
     int playerListIndex;
+    StandardYahtzeeRules yahtzeeRule = new StandardYahtzeeRules();
 
     public ArrayList<Integer> rollNewhand() {
         ArrayList<Integer> arr = new ArrayList<>();
@@ -53,7 +54,7 @@ public class Game {
     }
 
     public ArrayList<Boolean> possibleCategories(int[] finalhand) {
-        ArrayList<Boolean> checkable;
-
+        ArrayList<Boolean> checkable = yahtzeeRule.getCategories(finalhand);
+        return checkable;
     }
 }
