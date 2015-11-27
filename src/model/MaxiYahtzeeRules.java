@@ -5,6 +5,6 @@ package model;
  */
 public class MaxiYahtzeeRules {
 
-    //00w0w0w0
+
 }
 

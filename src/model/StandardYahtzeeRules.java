@@ -49,6 +49,17 @@ public class StandardYahtzeeRules {
         return numb;
     }
 
+    private boolean OnesTwosEtc(int[] dice, int[] numb){
+        boolean res = false;
+        int sum = 0;
+        for(int i = 0; i < 5; i++){
+            if(dice[i]== numb[i]){
+                sum += numb[i];
+                res = true;
+            }
+        }
+        return res;
+    }
     private boolean ThreeOfKind(int[] dice){
 
         boolean res = false;
@@ -138,5 +149,19 @@ public class StandardYahtzeeRules {
         }
 
         return res;
+    }
+
+    private boolean Chance(int [] dice){
+
+        int [] scores = Sort(dice);
+
+        int sum = 0;
+
+        for(int i = 0;i < 5; i++){
+            sum += dice[i];
+
+        }
+
+        return true;
     }
 }
