@@ -2,6 +2,7 @@ package model;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -16,7 +17,7 @@ public class DB {
      * Saves the passed member into the database.
      * @param game, the member to be saved.
      */
-    public static void saveGame(Game game) {
+    public static  void saveGame(Game game) {
         savedGames.add(game);
     }
 
@@ -29,6 +30,14 @@ public class DB {
             }
         }
         return game;
+    }
+
+    public static List<String> getSavedGameNames() {
+        ArrayList<String> games = new ArrayList<>();
+        for (Game g : savedGames) {
+            games.add(g.name);
+        }
+        return games;
     }
 
 }

@@ -1,7 +1,6 @@
 package controller;
 
 import model.DB;
-import model.Dice;
 import model.Game;
 import model.Player;
 import view.mainview;
@@ -16,7 +15,6 @@ public class Controller {
 
 
     mainview mv = new mainview();
-    String cmd = mv.getInput();
 
     int nRolls;
     ArrayList<Integer> rollingHand;
@@ -26,10 +24,10 @@ public class Controller {
     public void startNewGame() {
         mv.displayStart();
         String cmd = mv.getInput().toLowerCase();
-        if (cmd == "n") {
+        if (cmd.equals("n")) {
             startnewGame();
         }
-        else if (cmd == "l") {
+        else if (cmd.equals("l")) {
             playLoadedGame();
         }
         else {
@@ -41,7 +39,8 @@ public class Controller {
     public boolean commandControll(Game game) {
         while (true) {
             mv.displayCommands();
-            mv.displayMainScoreBoard(game.players);
+            mv.displayMainScoreBoard(game.players, game.possibleCategories(finalHand));
+            String cmd = mv.getInput().toLowerCase();
 
             if (cmd.equals("r")) {              //Reset for the next player.
                 nRolls = 0;
@@ -63,11 +62,11 @@ public class Controller {
     }
 
     public void rolling(Game game, Player p) {
-        mv.displayMainScoreBoard(game.players);
+        mv.displayMainScoreBoard(game.players, game.possibleCategories(finalHand));
         mv.displaySavedDices(finalHand);
         mv.displayRoll(rollingHand);
         mv.displayMessages("rollorscore");
-        String cmdIn = cmd.toLowerCase();
+        String cmdIn = mv.getInput().toLowerCase();
 
         if (cmdIn.equals("r")) {                            //If player wants to roll.
             if (nRolls == 0) {
@@ -83,7 +82,7 @@ public class Controller {
                     selectCategoryToScore(finalHand, p, game);       //Go to score selection part.
                 } else {
                     mv.displayMessages("choosedicestokeep");
-                    String in = cmd;                            //String of dices to keep.
+                    String in = mv.getInput();                            //String of dices to keep.
 
                     for (char c : in.toCharArray()) {           //For every char in the input string.
                         int x = Character.getNumericValue(c);   //Set x to char value.
@@ -114,7 +113,8 @@ public class Controller {
     }
 
     public void selectCategoryToScore(int[] finalHand, Player p, Game g) {        //Directs user to score part or w/e...
-        ArrayList<Boolean> selection = g.possibleCategories(finalHand);
+        ArrayList<Boolean> selection = g.possibleCategories(finalHand);           //Gets arraylist of possible score categories.
+
     }
 
     /*
@@ -133,7 +133,7 @@ public class Controller {
         newGame.numberOfPlayers = nPlayers;
 
         int n = 0;
-        while (n <= nPlayers) {                             //While number of players is less than or equal to specified.
+        while (n < nPlayers) {                             //While number of players is less than or equal to specified.
             Player newPlayer = new Player();                //Create new player object.
             mv.displayAddNewPlayer(n);
             String newPlayerName = mv.getInput();
@@ -150,6 +150,7 @@ public class Controller {
      */
     public void playLoadedGame() {                          //Load saved game and play.
         mv.displayMessages("enterSavedGameName");
+        mv.displaySavedGames(DB.getSavedGameNames());
         String name = mv.getInput();                        //Get game name to load.
         Game loadedGame = DB.loadGame(name);
         commandControll(loadedGame);                        //Call main program with loaded game

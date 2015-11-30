@@ -20,21 +20,31 @@ public class StandardYahtzeeRules {
     public ArrayList<Boolean> getCategories(int[] finalHand) {
         ArrayList<Boolean> categories = new ArrayList<>();
 
-        categories.add(Ones(finalHand));                                   //Adding them to the return list.
-        categories.add(Twos(finalHand));
-        categories.add(Threes(finalHand));
-        categories.add(Fours(finalHand));
-        categories.add(Fives(finalHand));
-        categories.add(Sixes(finalHand));
-        categories.add(ThreeOfKind(finalHand));
-        categories.add(FourOfKind(finalHand));
-        categories.add(fullHouse(finalHand));
-        categories.add(smallStraight(finalHand));
-        categories.add(Straight(finalHand));
-        categories.add(Chance(finalHand));
-        categories.add(Yahtzee(finalHand));
+        if (finalHand == null) {                                                //If the final hand is empty, just return an arraylist of false.
+            int n = 0;
+            while (n < 12) {
+                categories.add(false);
+                n++;
+            }
+            return categories;
+        }
+        else {
+            categories.add(Ones(finalHand));                                   //Adding them to the return list.
+            categories.add(Twos(finalHand));
+            categories.add(Threes(finalHand));
+            categories.add(Fours(finalHand));
+            categories.add(Fives(finalHand));
+            categories.add(Sixes(finalHand));
+            categories.add(ThreeOfKind(finalHand));
+            categories.add(FourOfKind(finalHand));
+            categories.add(fullHouse(finalHand));
+            categories.add(smallStraight(finalHand));
+            categories.add(Straight(finalHand));
+            categories.add(Chance(finalHand));
+            categories.add(Yahtzee(finalHand));
 
-        return categories;
+            return categories;
+        }
     }
 
     private int[] Sort(int[] dice){             //Takes in final hand of dices.

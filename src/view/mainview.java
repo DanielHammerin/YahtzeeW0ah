@@ -1,5 +1,6 @@
 package view;
 
+import model.Game;
 import model.Player;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class mainview {
         System.out.println("Enter the number(s) you wish to save.");
         System.out.println("Then press 'R' again to re-roll all unselected dices.");
     }
-    public void displayMainScoreBoard(ArrayList<Player> playerList) {
+    public void displayMainScoreBoard(ArrayList<Player> playerList, ArrayList<Boolean> categories) {
         /*
          * ArrayLists inside method so they are cleared (new ones made) every time the method is called.
          */
@@ -58,21 +59,37 @@ public class mainview {
             Totalscore.add(String.valueOf(p.getTotalscore()));
         }
 
-        System.out.println("|   | Name            " + stringBuilder(Name));
-        System.out.println("|1. | Ones            " + stringBuilder(Ones));
-        System.out.println("|2. | Twos            " + stringBuilder(Twos));
-        System.out.println("|3. | Threes          " + stringBuilder(Threes));
-        System.out.println("|4. | Fours           " + stringBuilder(Fours));
-        System.out.println("|5. | Fives           " + stringBuilder(Fives));
-        System.out.println("|6. | Sixes           " + stringBuilder(Sixes));
-        System.out.println("|7. | Three of a kind " + stringBuilder(Threeofakind));
-        System.out.println("|8. | Four of a kind  " + stringBuilder(Fourofakind));
-        System.out.println("|9. | Full House      " + stringBuilder(Fullhouse));
-        System.out.println("|1. | Small Straight  " + stringBuilder(Smallstraight));
-        System.out.println("|11.| Large Straight  " + stringBuilder(Largestraight));
-        System.out.println("|12.| Chance          " + stringBuilder(Chance));
-        System.out.println("|13.| Yahtzee         " + stringBuilder(Yahtzee));
-        System.out.println("|   | Total Score     " + stringBuilder(Totalscore));
+        boolean checkones = categories.get(0);              //Checkers for which categories are available to score in.
+        boolean checktwos = categories.get(1);
+        boolean checkthrees = categories.get(2);
+        boolean checkfours = categories.get(3);
+        boolean checkfives = categories.get(4);
+        boolean checksixes = categories.get(5);
+        boolean checkthreeofkind = categories.get(6);
+        boolean checkfourofkind = categories.get(7);
+        boolean checkfullhouse = categories.get(8);
+        boolean checksmallstraight = categories.get(9);
+        boolean checklargestraight = categories.get(10);
+        boolean checkchance = categories.get(11);
+        boolean checkyahtzee = categories.get(12);
+
+
+
+        System.out.println("| "+                                  "|   | Name            " + stringBuilder(Name));
+        System.out.println("|" + isPickable(checkones) +          "|1. | Ones            " + stringBuilder(Ones));
+        System.out.println("|" + isPickable(checktwos) +          "|2. | Twos            " + stringBuilder(Twos));
+        System.out.println("|" + isPickable(checkthrees) +        "|3. | Threes          " + stringBuilder(Threes));
+        System.out.println("|" + isPickable(checkfours) +         "|4. | Fours           " + stringBuilder(Fours));
+        System.out.println("|" + isPickable(checkfives) +         "|5. | Fives           " + stringBuilder(Fives));
+        System.out.println("|" + isPickable(checksixes) +         "|6. | Sixes           " + stringBuilder(Sixes));
+        System.out.println("|" + isPickable(checkthreeofkind) +   "|7. | Three of a kind " + stringBuilder(Threeofakind));
+        System.out.println("|" + isPickable(checkfourofkind) +    "|8. | Four of a kind  " + stringBuilder(Fourofakind));
+        System.out.println("|" + isPickable(checkfullhouse) +     "|9. | Full House      " + stringBuilder(Fullhouse));
+        System.out.println("|" + isPickable(checksmallstraight) + "|1. | Small Straight  " + stringBuilder(Smallstraight));
+        System.out.println("|" + isPickable(checklargestraight) + "|11.| Large Straight  " + stringBuilder(Largestraight));
+        System.out.println("|" + isPickable(checkchance) +        "|12.| Chance          " + stringBuilder(Chance));
+        System.out.println("|" + isPickable(checkyahtzee) +       "|13.| Yahtzee         " + stringBuilder(Yahtzee));
+        System.out.println("| "+                                  "|   | Total Score     " + stringBuilder(Totalscore));
 
     }
 
@@ -102,6 +119,20 @@ public class mainview {
             retPad += " ";
         }
         return retPad;
+    }
+
+    public String isPickable(boolean b) {
+        if (b == true) {
+            return "O";
+        }
+        else {
+            return "X";
+        }
+    }
+
+    public void displaySavedGames(List<String> savedGames) {
+        String out = stringBuilder(savedGames);
+        System.out.println(out);
     }
 
     public void displayRoll(ArrayList<Integer> arrOut) {
@@ -144,6 +175,9 @@ public class mainview {
         }
         else if (in.equals("rollorscore")) {
             System.out.println("Do you wish to score or roll again? R/S");
+        }
+        else if (in.equals("")) {
+
         }
     }
 
