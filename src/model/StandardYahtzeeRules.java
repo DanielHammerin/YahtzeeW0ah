@@ -149,7 +149,8 @@ public class StandardYahtzeeRules {
 
         int[] scores  = Sort(dice);
 
-        score = (1*scores [0])+(2*scores [1]) +(2*scores [1])+(3*scores [2])+(4*scores [3])+(5*scores [4])+(5*scores[6]);
+        score = (1*scores[0])+(2*scores[1])+(3*scores[2])+(4*scores[3])+
+                (5*scores[4])+(6*scores[5]);
 
         if(scores[0]== 3 || scores[1]== 3 || scores[2]== 3 || scores[3]== 3 || scores[4]== 3 || scores[5]== 3)
         {
