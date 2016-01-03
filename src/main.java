@@ -9,5 +9,4 @@ public class main {
         Controller ctrl = new Controller();
         ctrl.startNewGame();
     }
-    //aijsdio check
 }
