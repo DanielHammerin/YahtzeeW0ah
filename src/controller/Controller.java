@@ -6,6 +6,7 @@ import model.Player;
 import view.mainview;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 /**
@@ -38,15 +39,19 @@ public class Controller {
 
     public boolean commandControll(Game game) {
         while (true) {
+            nRolls = 0;
+            finalArrIndex = 0;
+            finalHand = new int[5];
+            rollingHand = new ArrayList<>();
+
             mv.displayCommands();
             mv.displayMainScoreBoard(game.players, game.possibleCategories(finalHand));
             String cmd = mv.getInput().toLowerCase();
 
-            if (cmd.equals("r")) {              //Reset for the next player.
-                nRolls = 0;
-                finalArrIndex = 0;
-                finalHand = new int[5];
+            if (cmd.equals("p")) {              //Reset for the next player.
                 Player p = game.getPlayer();
+                rollingHand = game.rollNewhand();
+                nRolls++;
                 rolling(game, p);
             }
             else if (cmd.equals("l")) {         //Load another game.
@@ -62,6 +67,7 @@ public class Controller {
     }
 
     public void rolling(Game game, Player p) {
+        mv.displayPlayersTurn(p.getName());
         mv.displayMainScoreBoard(game.players, game.possibleCategories(finalHand));
         mv.displaySavedDices(finalHand);
         mv.displayRoll(rollingHand);
@@ -73,29 +79,37 @@ public class Controller {
                 rollingHand = game.rollNewhand();           //RollingHand is an arrayList.
                 nRolls++;
                 rolling(game, p);
-            } else if (nRolls > 0 && nRolls < 4) {
+            }
+            else if (nRolls > 0 && nRolls < 4) {
                 if (nRolls == 3) {                          //If player has rolled 3 times.
                     for (int i : rollingHand) {
                         finalHand[finalArrIndex] = i;
                         finalArrIndex++;
                     }
                     selectCategoryToScore(finalHand, p, game);       //Go to score selection part.
-                } else {
+                }
+                else {
+                    //chooseDiceToKeep(game, p);
+
                     mv.displayMessages("choosedicestokeep");
                     String in = mv.getInput();                            //String of dices to keep.
 
                     for (char c : in.toCharArray()) {           //For every char in the input string.
                         int x = Character.getNumericValue(c);   //Set x to char value.
-                        for (int i : rollingHand) {             //Check the rolled hand.
+                        outerloop:
+                        for (Iterator<Integer> it = rollingHand.iterator(); it.hasNext(); ) {             //Check the rolled hand.
+                            int i = it.next();
                             if (x == i) {                       //If x matches any of the numbers rolled.
                                 finalHand[finalArrIndex] = i;   //Put x in the intArray finalHand[]
-                                rollingHand.remove(i);          //remove it from the arrayList of rolling dices.
+                                it.remove();                    //remove it from the arrayList of rolling dices.
                                 finalArrIndex++;                //Increase index in intArray.
+                                break outerloop;
                             }
                         }
                     }
                     rollingHand = game.rollHand(rollingHand);   //Re-roll remaining dices.
                     rolling(game, p);
+
                 }
             }
         }
@@ -111,9 +125,48 @@ public class Controller {
             rolling(game, p);
         }
     }
+    /*
+    public void chooseDiceToKeep(Game game, Player p) {
+        mv.displayMessages("choosedicestokeep");
+        String in = mv.getInput();                              //String of dices to keep.
 
+        for (char c : in.toCharArray()) {                       //For every char in the input string.
+            for (int i = rollingHand.size(); i >= 0 ; i--) {            //Check the rolled hand from last to first.
+                if (c == i) {                                   //If x matches any of the numbers rolled.
+                    finalHand[finalArrIndex] = rollingHand.get(i);               //Put value of i in the intArray finalHand[]
+                    rollingHand.remove(i);                      //remove i from the arrayList of rolling dices.
+                    finalArrIndex++;                            //Increase index in intArray.
+                }
+            }
+        }
+        rollingHand = game.rollHand(rollingHand);               //Re-roll remaining dices.
+        rolling(game, p);
+    }
+*/
     public void selectCategoryToScore(int[] finalHand, Player p, Game g) {        //Directs user to score part or w/e...
         ArrayList<Boolean> selection = g.possibleCategories(finalHand);           //Gets arraylist of possible score categories.
+        mv.displayMainScoreBoard(g.players, selection);                           //Show possible score categories.
+
+        mv.displayMessages("choosecat2score");
+        String cmdIn = mv.getInput().toLowerCase();
+        boolean checkable = g.getConfirmation(cmdIn, selection);                 //Boolean for if the chosen category is actually pickable.
+        boolean scoredBefore = g.categoryHasBeenScored(p, cmdIn);                    //Boolean for if the cateogry has already been picked.
+
+        if (checkable && !scoredBefore) {
+            g.scoreCategoryInPlayer(cmdIn, p, finalHand);
+        }
+        else if (!scoredBefore) {
+            mv.displayMessages("alreadyscored");
+            selectCategoryToScore(finalHand, p, g);
+        }
+        else if (!checkable) {
+            mv.displayMessages("cantscorethere");
+            selectCategoryToScore(finalHand, p, g);
+        }
+        else {
+            mv.displayMessages("notAvalidInput");
+            selectCategoryToScore(finalHand, p, g);
+        }
 
     }
 
@@ -138,6 +191,7 @@ public class Controller {
             mv.displayAddNewPlayer(n);
             String newPlayerName = mv.getInput();
             newPlayer.setName(newPlayerName);               //Set new player name.
+            newPlayer.setGameName(newGameName);             //Set name of game to a player to know which game they belong to.
             playerList.add(newPlayer);                      //Add player to arraylist of players.
             n++;
         }

@@ -16,13 +16,14 @@ public class StandardYahtzeeRules {
 
     /*
      * Method for checking which categories are scorable.
+     * Created by Daniel Hammerin 2015-11-15
      */
     public ArrayList<Boolean> getCategories(int[] finalHand) {
         ArrayList<Boolean> categories = new ArrayList<>();
 
         if (finalHand == null) {                                                //If the final hand is empty, just return an arraylist of false.
             int n = 0;
-            while (n < 12) {
+            while (n <= 12) {
                 categories.add(false);
                 n++;
             }
@@ -47,7 +48,7 @@ public class StandardYahtzeeRules {
         }
     }
 
-    private int[] Sort(int[] dice){             //Takes in final hand of dices.
+    public int[] Sort(int[] dice){             //Takes in final hand of dices.
 
         int one = 0;
         int two = 0;
@@ -248,5 +249,83 @@ public class StandardYahtzeeRules {
         }
 
         return true;
+    }
+    /*
+     * Method for scoring in lower scores.
+     * Created by Daniel Hammerin 2015-12-20
+     */
+    public int score(int[] finalHand, int n) {
+        int s = 0;
+        for (int i : finalHand) {
+            if (i == n) {
+                s += n;
+            }
+        }
+        return s;
+    }
+    /*
+     * Method for putting score in player.
+     * Created by Daniel Hammerin 2015-12-20
+     */
+    public void scoreCategoryInPlayer(String cmdIn, Player p, int[] finalHand) {                                        //Score in category chosen.
+        int in = Integer.parseInt(cmdIn);
+
+        if (in == 1) {
+            p.setOnes(score(finalHand, 1));
+        }
+        else if (in == 2) {
+            p.setTwos(score(finalHand, 2));
+        }
+        else if (in == 3) {
+            p.setThrees(score(finalHand, 3));
+        }
+        else if (in == 4) {
+            p.setFours(score(finalHand, 4));
+        }
+        else if (in == 5) {
+            p.setFives(score(finalHand, 5));
+        }
+        else if (in == 6) {
+            p.setSixes(score(finalHand, 6));
+        }
+        else if (in == 7) {
+            int[] intArr = Sort(finalHand);
+            int s = 0;
+            for (int i : intArr) {
+                if (i >= 3) {
+                    s = i * 3;
+                }
+            }
+            p.setThreeofakind(s);
+        }
+        else if (in == 8) {
+            int[] intArr = Sort(finalHand);
+            int s = 0;
+            for (int i : intArr) {
+                if (i >= 4) {
+                    s = i * 4;
+                }
+            }
+            p.setFourofakind(s);
+        }
+        else if (in == 9) {
+            p.setFullhouse(25);
+        }
+        else if (in == 10) {
+            p.setSmallstraight(30);
+        }
+        else if (in == 11) {
+            p.setLargestraight(40);
+        }
+        else if (in == 12) {
+            int s = 0;
+            for (int i : finalHand) {
+                s += i;
+            }
+            p.setChance(s);
+        }
+        else if (in == 13) {
+            p.setYahtzee(50);
+        }
     }
 }

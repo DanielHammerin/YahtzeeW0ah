@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Player {
 
     private String name;
+    private String gameName;                                            //Which game the player belongs to.
 
     private int ones;
     private int twos;
@@ -24,14 +25,14 @@ public class Player {
     private int chance;
     private int yahtzee;
 
-    private int totalscore;
+    private int totalscore = ones + twos + threes + fours + fives + sixes + threeofakind + fourofakind + fullhouse + smallstraight + largestraight + chance + yahtzee;
 
     public int getOnes() {
         return ones;
     }
 
     public void setOnes(int ones) {
-        this.ones = ones;
+        this.ones += ones;
     }
 
     public int getTwos() {
@@ -39,7 +40,7 @@ public class Player {
     }
 
     public void setTwos(int twos) {
-        this.twos = twos;
+        this.twos += twos;
     }
 
     public int getThrees() {
@@ -47,7 +48,7 @@ public class Player {
     }
 
     public void setThrees(int threes) {
-        this.threes = threes;
+        this.threes += threes;
     }
 
     public int getFours() {
@@ -55,7 +56,7 @@ public class Player {
     }
 
     public void setFours(int fours) {
-        this.fours = fours;
+        this.fours += fours;
     }
 
     public int getFives() {
@@ -63,7 +64,7 @@ public class Player {
     }
 
     public void setFives(int fives) {
-        this.fives = fives;
+        this.fives += fives;
     }
 
     public int getSixes() {
@@ -71,7 +72,7 @@ public class Player {
     }
 
     public void setSixes(int sixes) {
-        this.sixes = sixes;
+        this.sixes += sixes;
     }
 
     public int getThreeofakind() {
@@ -79,7 +80,7 @@ public class Player {
     }
 
     public void setThreeofakind(int threeofakind) {
-        this.threeofakind = threeofakind;
+        this.threeofakind += threeofakind;
     }
 
     public int getFourofakind() {
@@ -87,7 +88,7 @@ public class Player {
     }
 
     public void setFourofakind(int fourofakind) {
-        this.fourofakind = fourofakind;
+        this.fourofakind += fourofakind;
     }
 
     public int getFullhouse() {
@@ -95,7 +96,7 @@ public class Player {
     }
 
     public void setFullhouse(int fullhouse) {
-        this.fullhouse = fullhouse;
+        this.fullhouse += fullhouse;
     }
 
     public int getSmallstraight() {
@@ -103,7 +104,7 @@ public class Player {
     }
 
     public void setSmallstraight(int smallstraight) {
-        this.smallstraight = smallstraight;
+        this.smallstraight += smallstraight;
     }
 
     public int getLargestraight() {
@@ -111,7 +112,7 @@ public class Player {
     }
 
     public void setLargestraight(int largestraight) {
-        this.largestraight = largestraight;
+        this.largestraight += largestraight;
     }
 
     public int getChance() {
@@ -119,7 +120,7 @@ public class Player {
     }
 
     public void setChance(int chance) {
-        this.chance = chance;
+        this.chance += chance;
     }
 
     public int getYahtzee() {
@@ -127,7 +128,7 @@ public class Player {
     }
 
     public void setYahtzee(int yahtzee) {
-        this.yahtzee = yahtzee;
+        this.yahtzee += yahtzee;
     }
 
     public int getTotalscore() {
@@ -135,7 +136,7 @@ public class Player {
     }
 
     public void setTotalscore(int totalscore) {
-        this.totalscore = totalscore;
+        this.totalscore += totalscore;
     }
 
     public String getName() {
@@ -144,5 +145,102 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setGameName(String name) {
+        this.gameName = name;
+    }
+
+    public String getGameName() {
+        return gameName;
+    }
+
+    public ArrayList<Boolean> getPlayerCategories(Player p) {
+        ArrayList<Boolean> pc = new ArrayList<>();
+        if (p.getOnes() == 0) {
+            pc.add(false);
+        }
+        else {
+            pc.add(true);
+        }
+        if (p.getOnes() == 0) {
+            pc.add(false);
+        }
+        else {
+            pc.add(true);
+        }
+        if (p.getTwos() == 0) {
+            pc.add(false);
+        }
+        else {
+            pc.add(true);
+        }
+        if (p.getThrees() == 0) {
+            pc.add(false);
+        }
+        else {
+            pc.add(true);
+        }
+        if (p.getFours() == 0) {
+            pc.add(false);
+        }
+        else {
+            pc.add(true);
+        }
+        if (p.getFives() == 0) {
+            pc.add(false);
+        }
+        else {
+            pc.add(true);
+        }
+        if (p.getSixes() == 0) {
+            pc.add(false);
+        }
+        else {
+            pc.add(true);
+        }
+        if (p.getThreeofakind() == 0) {
+            pc.add(false);
+        }
+        else {
+            pc.add(true);
+        }
+        if (p.getFourofakind() == 0) {
+            pc.add(false);
+        }
+        else {
+            pc.add(true);
+        }
+        if (p.getFullhouse() == 0) {
+            pc.add(false);
+        }
+        else {
+            pc.add(true);
+        }
+        if (p.getSmallstraight() == 0) {
+            pc.add(false);
+        }
+        else {
+            pc.add(true);
+        }
+        if (p.getLargestraight() == 0) {
+            pc.add(false);
+        }
+        else {
+            pc.add(true);
+        }
+        if (p.getChance() == 0) {
+            pc.add(false);
+        }
+        else {
+            pc.add(true);
+        }
+        if (p.getYahtzee() == 0) {
+            pc.add(false);
+        }
+        else {
+            pc.add(true);
+        }
+        return pc;
     }
 }

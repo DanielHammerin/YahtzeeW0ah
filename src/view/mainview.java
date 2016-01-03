@@ -13,10 +13,11 @@ import java.util.Scanner;
 public class mainview {
 
     public void displayCommands() {
-        System.out.println("To roll, press:   'R'");
-        System.out.println("The roll will be displayed as a series of numbers.");
+        System.out.println("To Play, press:   'P'");
+        System.out.println("The rolls will be displayed as a series of numbers.");
         System.out.println("Enter the number(s) you wish to save.");
         System.out.println("Then press 'R' again to re-roll all unselected dices.");
+        System.out.println("The players must take turns in rolling.");
     }
     public void displayMainScoreBoard(ArrayList<Player> playerList, ArrayList<Boolean> categories) {
         /*
@@ -85,7 +86,7 @@ public class mainview {
         System.out.println("|" + isPickable(checkthreeofkind) +   "|7. | Three of a kind " + stringBuilder(Threeofakind));
         System.out.println("|" + isPickable(checkfourofkind) +    "|8. | Four of a kind  " + stringBuilder(Fourofakind));
         System.out.println("|" + isPickable(checkfullhouse) +     "|9. | Full House      " + stringBuilder(Fullhouse));
-        System.out.println("|" + isPickable(checksmallstraight) + "|1. | Small Straight  " + stringBuilder(Smallstraight));
+        System.out.println("|" + isPickable(checksmallstraight) + "|10.| Small Straight  " + stringBuilder(Smallstraight));
         System.out.println("|" + isPickable(checklargestraight) + "|11.| Large Straight  " + stringBuilder(Largestraight));
         System.out.println("|" + isPickable(checkchance) +        "|12.| Chance          " + stringBuilder(Chance));
         System.out.println("|" + isPickable(checkyahtzee) +       "|13.| Yahtzee         " + stringBuilder(Yahtzee));
@@ -137,9 +138,14 @@ public class mainview {
 
     public void displayRoll(ArrayList<Integer> arrOut) {
         StringBuilder sb = new StringBuilder();
-        for (int i : arrOut) {
-            sb.append(i).toString();
-            sb.append(", ");
+        if (arrOut.isEmpty() || arrOut == null) {
+            sb.append("");
+        }
+        else {
+            for (int i : arrOut) {
+                sb.append(i).toString();
+                sb.append(", ");
+            }
         }
         System.out.println("Rolled numbers: " + sb.toString());
     }
@@ -174,10 +180,20 @@ public class mainview {
             System.out.println("Choose which dices you wish to keep. (Enter their actual number)");
         }
         else if (in.equals("rollorscore")) {
-            System.out.println("Do you wish to score or roll again? R/S");
+            System.out.println("Do you wish to score or roll? R/S");
         }
-        else if (in.equals("")) {
-
+        else if (in.equals("choosecat2score")) {
+            System.out.println("Please choose category to score in. Possible, marked with 'O' and not possible, marked with 'X'");
+            System.out.println("To score, enter the corresponding number for the category.");
+        }
+        else if (in.equals("cantscorethere")) {
+            System.out.println("You can't score in that category.");
+        }
+        else if (in.equals("alreadyscored")) {
+            System.out.println("You have already scored in this category.");
+        }
+        else {
+            System.out.println("There is no such command available right now.");
         }
     }
 
@@ -202,8 +218,18 @@ public class mainview {
     public void displaySavedDices(int[] finalHand) {
         StringBuilder sb = new StringBuilder();
         for (int i : finalHand) {
-            sb.append(i);
+            if (i == 0) {
+                sb.append("");
+            }
+            else {
+                sb.append(i);
+                sb.append(" ");
+            }
         }
         System.out.println("Saved dices: " + sb.toString());
+    }
+
+    public void displayPlayersTurn(String name) {
+        System.out.println(name + "'s turn to play.");
     }
 }
