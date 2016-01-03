@@ -330,11 +330,13 @@ public class ForcedYahtzeeRules {
 
     //Method to check if a player has reached a score of 200, if so then the game is over and the player won
 
-    public void GameOver(Player p, int [] finalHand, Game game){
-        for(Player i: game.players)
-        if(i.getTotalscore() == 200){
-            System.out.println("Player"+i.getName()+"Has reached the score of 200, thus he wins the game.");
+    public boolean GameOverTwo(Game game){
+        for(Player i: game.players) {
+            if (i.getTotalscore() == 200) {
+                return true;
+            }
         }
+        return false;
     }
 }
 

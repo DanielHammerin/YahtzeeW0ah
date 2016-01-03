@@ -1,5 +1,6 @@
 package model;
 
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 /**
@@ -13,8 +14,10 @@ public class Game {
     int playerListIndex;
     ArrayList<Boolean> checkable;
     StandardYahtzeeRules yahtzeeRule = new StandardYahtzeeRules();
+    public int Rounds;
 
     public ArrayList<Integer> rollNewhand() {
+        Rounds++;
         ArrayList<Integer> arr = new ArrayList<>();
         Dice dice = new Dice();
         int n = 0;
@@ -25,6 +28,13 @@ public class Game {
         return arr;
     }
     public ArrayList<Integer> rollHand(ArrayList<Integer> arr) {
+
+        Rounds++;
+        StandardYahtzeeRules r = new StandardYahtzeeRules();
+        ForcedYahtzeeRules e = new ForcedYahtzeeRules();
+        e.GameOverTwo(game);
+        r.GameOverOne(game);
+
         ArrayList<Integer> retArr = new ArrayList<>();
         Dice dice = new Dice();
         for (int i : arr) {
@@ -88,6 +98,15 @@ public class Game {
         }
         return b;
     }
+
+    public void whoWon(){
+
+        //IF gameover1 = true; skriv ut allas score men ändå säg vem hade högsta
+        //IF gameover2 = true; skriv ut den som hade högst score
+        // fixa så att man kan spara score efter ett gameOver
+
+    }
+
 
 
 }

@@ -328,4 +328,13 @@ public class StandardYahtzeeRules {
             p.setYahtzee(50);
         }
     }
+
+
+    public boolean GameOverOne(Game game){
+
+        if(game.Rounds == 13){
+         return true;
+        }
+    return false;
+    }
 }
