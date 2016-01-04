@@ -99,12 +99,17 @@ public class Game {
         }
         return winner;
     }
+
     public boolean isGameOver(Game g) {
         return yahtzeeRule.isGameOver(g);
     }
 
     public void increaseRound() {
         rounds++;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
     }
 
 }

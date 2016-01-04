@@ -27,9 +27,11 @@ public class Controller {
         String cmd = mv.getInput().toLowerCase();
         if (cmd.equals("n")) {
             startnewGame();
-        } else if (cmd.equals("l")) {
+        }
+        else if (cmd.equals("l")) {
             playLoadedGame();
-        } else {
+        }
+        else {
             mv.displayMessages("notAvalidInput");
             startnewGame();
         }
