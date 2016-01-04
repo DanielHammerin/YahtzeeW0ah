@@ -1,11 +1,12 @@
 package model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
- * Created by Markus on 16/11/15.
+ * Created by Markus on 12/11/15.
  */
-public class ForcedYahtzeeRules {
+public class StandardRules {
 
     private int score;
 
@@ -13,10 +14,9 @@ public class ForcedYahtzeeRules {
         return score;
     }
 
-    /*
-     * Method for checking which categories are scorable.
-     * Created by Daniel Hammerin 2015-11-15
-     */
+
+     //Method for checking which categories are scorable.
+
     public ArrayList<Boolean> getCategories(int[] finalHand) {
         ArrayList<Boolean> categories = new ArrayList<>();
 
@@ -173,7 +173,7 @@ public class ForcedYahtzeeRules {
         if(scores[0]== 4 || scores[1]== 4 || scores[2]== 4 || scores[3]== 4 || scores[4]== 4 || scores[5]== 4){
             res = true;
         }
-        return res;
+    return res;
     }
 
 
@@ -211,8 +211,6 @@ public class ForcedYahtzeeRules {
         boolean res = false;
         int[] scores = Sort(dice);
 
-        // StandardYahtzeeRules.Sort(scores);
-
 
         if((scores[5] == scores[5]+1) &&(scores[4] == scores[3]+1) && (scores[3] == scores[2]+1)){
             res = true;
@@ -225,8 +223,6 @@ public class ForcedYahtzeeRules {
 
         boolean res = false;
         int[] scores = Sort(dice);
-
-        // StandardYahtzeeRules.Sort(scores);
 
         if(scores[5] == 3 && scores[4] == 2)
         {
@@ -249,10 +245,9 @@ public class ForcedYahtzeeRules {
 
         return true;
     }
-    /*
-     * Method for scoring in lower scores.
-     * Created by Daniel Hammerin 2015-12-20
-     */
+
+     // Method for scoring in lower scores.
+
     public int score(int[] finalHand, int n) {
         int s = 0;
         for (int i : finalHand) {
@@ -262,10 +257,9 @@ public class ForcedYahtzeeRules {
         }
         return s;
     }
-    /*
-     * Method for putting score in player.
-     * Created by Daniel Hammerin 2015-12-20
-     */
+
+     //Method for putting score in player.
+
     public void scoreCategoryInPlayer(String cmdIn, Player p, int[] finalHand) {                                        //Score in category chosen.
         int in = Integer.parseInt(cmdIn);
 
@@ -328,15 +322,12 @@ public class ForcedYahtzeeRules {
         }
     }
 
-    //Method to check if a player has reached a score of 200, if so then the game is over and the player won
 
-    public boolean GameOverTwo(Game game){
-        for(Player i: game.players) {
-            if (i.getTotalscore() == 200) {
-                return true;
-            }
+    public boolean GameOverOne(Game game){
+
+        if(game.Rounds == 13){
+         return true;
         }
-        return false;
+    return false;
     }
 }
-
