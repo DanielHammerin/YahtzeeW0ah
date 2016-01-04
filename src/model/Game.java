@@ -16,7 +16,6 @@ public class Game {
     public int Rounds;
 
     public ArrayList<Integer> rollNewhand() {
-        Rounds++;
         ArrayList<Integer> arr = new ArrayList<>();
         Dice dice = new Dice();
         int n = 0;
@@ -27,13 +26,6 @@ public class Game {
         return arr;
     }
     public ArrayList<Integer> rollHand(ArrayList<Integer> arr) {
-
-        Rounds++;
-        StandardRules r = new StandardRules();
-        RushedRules e = new RushedRules();
-        e.GameOverTwo(game);
-        r.GameOverOne(game);
-
         ArrayList<Integer> retArr = new ArrayList<>();
         Dice dice = new Dice();
         for (int i : arr) {
