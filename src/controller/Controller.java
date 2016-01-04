@@ -27,11 +27,9 @@ public class Controller {
         String cmd = mv.getInput().toLowerCase();
         if (cmd.equals("n")) {
             startnewGame();
-        }
-        else if (cmd.equals("l")) {
+        } else if (cmd.equals("l")) {
             playLoadedGame();
-        }
-        else {
+        } else {
             mv.displayMessages("notAvalidInput");
             startnewGame();
         }
@@ -39,29 +37,35 @@ public class Controller {
 
     public boolean commandControll(Game game) {
         while (true) {
-            nRolls = 0;
-            finalArrIndex = 0;
-            finalHand = new int[5];
-            rollingHand = new ArrayList<>();
-
-            mv.displayCommands();
-            mv.displayMainScoreBoard(game.players, game.possibleCategories(finalHand));
-            String cmd = mv.getInput().toLowerCase();
-
-            if (cmd.equals("p")) {              //Reset for the next player.
-                Player p = game.getPlayer();
-                rollingHand = game.rollNewhand();
-                nRolls++;
-                rolling(game, p);
-            }
-            else if (cmd.equals("l")) {         //Load another game.
-
-            }
-            else if (cmd.equals("s")) {         //Save game.
-
+            if (game.isGameOver(game)) {                      //Checks if  the game is over and who won.
+                mv.displayWinner(game.getWinner());
             }
             else {
-                mv.displayMessages("notAvalidInput");
+                nRolls = 0;
+                finalArrIndex = 0;
+                finalHand = new int[5];
+                rollingHand = new ArrayList<>();
+
+                mv.displayCommands();
+                mv.displayMainScoreBoard(game.players, game.possibleCategories(finalHand));
+                String cmd = mv.getInput().toLowerCase();
+
+                if (cmd.equals("p")) {              //Reset for the next player.
+                    game.increaseRound();           //Increase round number for every cycle of all players.
+                    Player p = game.getPlayer();
+                    rollingHand = game.rollNewhand();
+                    nRolls++;
+                    rolling(game, p);
+                }
+                else if (cmd.equals("l")) {         //Load another game.
+
+                }
+                else if (cmd.equals("s")) {         //Save game.
+
+                }
+                else {
+                    mv.displayMessages("notAvalidInput");
+                }
             }
         }
     }
@@ -79,16 +83,14 @@ public class Controller {
                 rollingHand = game.rollNewhand();           //RollingHand is an arrayList.
                 nRolls++;
                 rolling(game, p);
-            }
-            else if (nRolls > 0 && nRolls < 4) {
+            } else if (nRolls > 0 && nRolls < 4) {
                 if (nRolls == 3) {                          //If player has rolled 3 times.
                     for (int i : rollingHand) {
                         finalHand[finalArrIndex] = i;
                         finalArrIndex++;
                     }
                     selectCategoryToScore(finalHand, p, game);       //Go to score selection part.
-                }
-                else {
+                } else {
                     //chooseDiceToKeep(game, p);
 
                     mv.displayMessages("choosedicestokeep");
@@ -112,19 +114,18 @@ public class Controller {
 
                 }
             }
-        }
-        else if (cmdIn.equals("s")) {               //If player wants to score.
+        } else if (cmdIn.equals("s")) {               //If player wants to score.
             for (int i : rollingHand) {             //Put all dices to saved hand.
                 finalHand[finalArrIndex] = i;
                 finalArrIndex++;
             }
             selectCategoryToScore(finalHand, p, game);       //Go to score selection part.
-        }
-        else {
+        } else {
             mv.displayMessages("notAvalidInput");
             rolling(game, p);
         }
     }
+
     /*
     public void chooseDiceToKeep(Game game, Player p) {
         mv.displayMessages("choosedicestokeep");
@@ -154,16 +155,13 @@ public class Controller {
 
         if (checkable && !scoredBefore) {
             g.scoreCategoryInPlayer(cmdIn, p, finalHand);
-        }
-        else if (!scoredBefore) {
+        } else if (!scoredBefore) {
             mv.displayMessages("alreadyscored");
             selectCategoryToScore(finalHand, p, g);
-        }
-        else if (!checkable) {
+        } else if (!checkable) {
             mv.displayMessages("cantscorethere");
             selectCategoryToScore(finalHand, p, g);
-        }
-        else {
+        } else {
             mv.displayMessages("notAvalidInput");
             selectCategoryToScore(finalHand, p, g);
         }

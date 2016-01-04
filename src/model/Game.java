@@ -13,7 +13,7 @@ public class Game {
     int playerListIndex;
     ArrayList<Boolean> checkable;
     StandardRules yahtzeeRule = new StandardRules();
-    public int Rounds;
+    public int rounds;
 
     public ArrayList<Integer> rollNewhand() {
         ArrayList<Integer> arr = new ArrayList<>();
@@ -90,17 +90,21 @@ public class Game {
         return b;
     }
 
-    public void whoWon(StandardRules rules, RushedRules rulez, Player p, Game game){
-
-        if(rules.GameOverOne(game)== true || rulez.GameOverTwo(game)== true) {
-            for(Player i: game.players) {
-                System.out.println("The game is now completed. Player "+i.getName()+" Has won.");
+    public Player getWinner() {
+        Player winner = players.get(0);
+        for (Player p : players) {
+            if (p.getTotalscore() > winner.getTotalscore()) {
+                winner = p;
             }
-
         }
-
+        return winner;
+    }
+    public boolean isGameOver(Game g) {
+        return yahtzeeRule.isGameOver(g);
     }
 
-
+    public void increaseRound() {
+        rounds++;
+    }
 
 }

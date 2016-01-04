@@ -160,6 +160,10 @@ public class mainview {
         return ret;
     }
 
+    public void displayWinner(Player winner) {
+        System.out.println(winner.getName() + " Won with the total score of: " + winner.getTotalscore());
+    }
+
     public void displayMessages(String in) {
         if (in.equals("enterNplayers")) {
             System.out.println("Please enter number of players. (1-5)");
