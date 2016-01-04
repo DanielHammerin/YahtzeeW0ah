@@ -40,4 +40,8 @@ public class DB {
         return games;
     }
 
+    public static ArrayList<Game> getGames() {
+        return savedGames;
+    }
+
 }

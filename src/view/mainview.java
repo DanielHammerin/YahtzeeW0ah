@@ -177,8 +177,8 @@ public class mainview {
         else if (in.equals("enterSavedGameName")) {
             System.out.println("Enter the name of your saved game.");
         }
-        else if(in.equals("enterplayername")) {
-            System.out.println("Enter ");
+        else if(in.equals("savedgames")) {
+            System.out.println("Saved games: ");
         }
         else if (in.equals("choosedicestokeep")) {
             System.out.println("Choose which dices you wish to keep. (Enter their actual number)");
@@ -195,6 +195,9 @@ public class mainview {
         }
         else if (in.equals("alreadyscored")) {
             System.out.println("You have already scored in this category.");
+        }
+        else if (in.equals("compactverbose")) {
+            System.out.println("Do you want a compact or verbose list?");
         }
         else {
             System.out.println("There is no such command available right now.");

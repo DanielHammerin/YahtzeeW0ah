@@ -31,6 +31,9 @@ public class Controller {
         else if (cmd.equals("l")) {
             playLoadedGame();
         }
+        else if (cmd.equals("v")) {
+            viewFinishedGame();
+        }
         else {
             mv.displayMessages("notAvalidInput");
             startnewGame();
@@ -60,10 +63,10 @@ public class Controller {
                     rolling(game, p);
                 }
                 else if (cmd.equals("l")) {         //Load another game.
-
+                    loadAnotherGame(game);
                 }
                 else if (cmd.equals("s")) {         //Save game.
-
+                    saveGame(game);
                 }
                 else {
                     mv.displayMessages("notAvalidInput");
@@ -210,12 +213,44 @@ public class Controller {
         commandControll(loadedGame);                        //Call main program with loaded game
     }
 
-    public void loadAnotherGame() {
+    public void viewFinishedGame() {
+        mv.displayMessages("savedgames");
+        mv.displaySavedGames(DB.getSavedGameNames());
+        mv.displayMessages("enterSavedGameName");
+        String name = mv.getInput();
+        Game loadedGame = DB.loadGame(name);
 
+        mv.displayMessages("compactverbose");
+        String s = mv.getInput();
+        if (s.equals("v")) {
+            int[] temp = {0,0,0,0,0};
+            mv.displayMainScoreBoard(loadedGame.players, loadedGame.possibleCategories(temp));
+        }
+        else if (s.equals("c")) {
+
+        }
     }
 
-    public void saveGame() {
+    public void loadAnotherGame(Game thisGame) {
+        for (Game g : DB.getGames()) {                      //Checks if this game has been saved before.
+            if (thisGame.name.equals(g.name)) {             //If it has,
+                g = thisGame;                               //overwrite previous save.
+            }
+        }
+        mv.displayMessages("enterSavedGameName");
+        String s = mv.getInput();
+        commandControll(DB.loadGame(s));
+    }
 
+    public void saveGame(Game thisGame) {
+        for (Game g : DB.getGames()) {                      //Checks if game has been saved already.
+            if (thisGame.name.equals(g.name)) {             //If it has,
+                g = thisGame;                               //Overwrite it.
+            }
+            else {
+                DB.saveGame(thisGame);                      //If not, just put it in.
+            }
+        }
     }
 
 }
