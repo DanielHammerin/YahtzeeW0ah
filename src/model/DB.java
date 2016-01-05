@@ -45,12 +45,12 @@ public class DB implements Serializable{
         return savedGames;
     }
 
-    public boolean GameSave(Object object){
+    public boolean GameSave(Game game){
 
         try{
             FileOutputStream file = new FileOutputStream("savedGame.ser");
             ObjectOutputStream out = new ObjectOutputStream(file);
-            out.writeObject(object);
+            out.writeObject(game);
             System.out.printf("The data is now saved in savedGame.ser file");
 
         }catch(IOException i){
@@ -60,6 +60,25 @@ public class DB implements Serializable{
     }
 
     public Game GameLoad(Game game){
-        return null;
+        try
+        {
+            File file = new File("savedGame.ser");
+            FileInputStream fileIn = new FileInputStream(file);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            game = (Game) in.readObject();
+            in.close();
+            fileIn.close();
+            return game;
+        }catch(IOException i)
+        {
+            i.printStackTrace();
+            return null;
+        }catch(ClassNotFoundException c)
+        {
+            System.out.println("Employee class not found");
+            c.printStackTrace();
+            return null;
+        }
     }
 }
+
