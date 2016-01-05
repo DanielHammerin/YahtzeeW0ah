@@ -168,6 +168,9 @@ public class mainview {
         if (in.equals("enterNplayers")) {
             System.out.println("Please enter number of players. (1-5)");
         }
+        else if(in.equals("ThisGameIsNowSaved")){
+            System.out.println("This game is now saved");
+        }
         else if (in.equals("notAvalidInput")) {
             System.out.println("Not a valid input please try again.");
         }
