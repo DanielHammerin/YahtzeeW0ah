@@ -66,17 +66,14 @@ public class DB implements Serializable{
             FileInputStream fileIn = new FileInputStream(file);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             game = (Game) in.readObject();
-            in.close();
-            fileIn.close();
             return game;
-        }catch(IOException i)
-        {
+        }catch(IOException i) {
             i.printStackTrace();
+
             return null;
-        }catch(ClassNotFoundException c)
-        {
-            System.out.println("Employee class not found");
+        }catch(ClassNotFoundException c){
             c.printStackTrace();
+
             return null;
         }
     }
