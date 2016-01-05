@@ -18,8 +18,16 @@ public class DB implements Serializable{
      * Saves the passed member into the database.
      * @param game, the member to be saved.
      */
-    public static  void saveGame(Game game) {
-        savedGames.add(game);
+    public static void saveGame(Game game) {
+        for (Game g : savedGames) {
+            if (g.name.equals(game.name)) {
+                savedGames.remove(g);
+                savedGames.add(game);
+            }
+            else {
+                savedGames.add(game);
+            }
+        }
     }
 
     public static Game loadGame(String gameName) {

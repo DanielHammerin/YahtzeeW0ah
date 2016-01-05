@@ -233,21 +233,26 @@ public class Controller {
 
     public void viewFinishedGame() {
         mv.displayMessages("savedgames");
-        mv.displaySavedGames(DB.getSavedGameNames());
-        mv.displayMessages("enterSavedGameName");
-        String name = mv.getInput();
-        Game loadedGame = DB.loadGame(name);
-
-        mv.displayMessages("compactverbose");
-        String s = mv.getInput();
-        if (s.equals("v")) {
-            int[] temp = {0,0,0,0,0};
-            mv.displayDate(loadedGame.date);
-            mv.displayMainScoreBoard(loadedGame.players, loadedGame.possibleCategories(temp));
+        if (DB.getGames().isEmpty()) {
+            mv.displayMessages("nogames");
+            startNewGame();
         }
-        else if (s.equals("c")) {
-            mv.displayDate(loadedGame.date);
-            mv.displayCompactList(loadedGame);
+        else {
+            mv.displaySavedGames(DB.getSavedGameNames());
+            mv.displayMessages("enterSavedGameName");
+            String name = mv.getInput();
+            Game loadedGame = DB.loadGame(name);
+
+            mv.displayMessages("compactverbose");
+            String s = mv.getInput();
+            if (s.equals("v")) {
+                int[] temp = {0, 0, 0, 0, 0};
+                mv.displayDate(loadedGame.date);
+                mv.displayMainScoreBoard(loadedGame.players, loadedGame.possibleCategories(temp));
+            } else if (s.equals("c")) {
+                mv.displayDate(loadedGame.date);
+                mv.displayCompactList(loadedGame);
+            }
         }
     }
 
@@ -257,11 +262,8 @@ public class Controller {
             startNewGame();
         }
         else {
-            for (Game g : DB.getGames()) {                      //Checks if this game has been saved before.
-                if (thisGame.name.equals(g.name)) {             //If it has,
-                    g = thisGame;                               //overwrite previous save.
-                }
-            }
+            DB.saveGame(thisGame);
+
             mv.displayMessages("enterSavedGameName");
             mv.displaySavedGames(DB.getSavedGameNames());
             String s = mv.getInput();
@@ -270,14 +272,7 @@ public class Controller {
     }
 
     public void saveGame(Game thisGame) {
-        for (Game g : DB.getGames()) {                      //Checks if game has been saved already.
-            if (thisGame.name.equals(g.name)) {             //If it has,
-                g = thisGame;                               //Overwrite it.
-            }
-            else {
-                DB.saveGame(thisGame);                      //If not, just put it in.
-            }
-        }
+        DB.saveGame(thisGame);
     }
 
 }
