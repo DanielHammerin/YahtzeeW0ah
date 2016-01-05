@@ -38,7 +38,7 @@ public class RushedRules {
             categories.add(FourOfKind(finalHand));
             categories.add(fullHouse(finalHand));
             categories.add(smallStraight(finalHand));
-            categories.add(Straight(finalHand));
+            categories.add(largeStraight(finalHand));
             categories.add(Chance(finalHand));
             categories.add(Yahtzee(finalHand));
 
@@ -191,7 +191,7 @@ public class RushedRules {
     }
 
 
-    private boolean Straight(int[] dice) {
+    private boolean largeStraight(int[] dice) {
 
         boolean res = false;
 
@@ -213,7 +213,7 @@ public class RushedRules {
         int[] scores = Sort(dice);
 
 
-        if ((scores[5] == scores[5] + 1) && (scores[4] == scores[3] + 1) && (scores[3] == scores[2] + 1)) {
+        if ((scores[5] == scores[4] + 1) && (scores[4] == scores[3] + 1) && (scores[3] == scores[2] + 1)) {
             res = true;
         }
         return res;
