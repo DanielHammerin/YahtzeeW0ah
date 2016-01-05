@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class mainview {
 
     public void displayCommands() {
-        System.out.println("To Play, press:   'P'");
+        System.out.println("To Play, press: 'P' / To save, press: 'S' / To load another game, press: 'l'");
         System.out.println("The rolls will be displayed as a series of numbers.");
         System.out.println("Enter the number(s) you wish to save.");
         System.out.println("Then press 'R' again to re-roll all unselected dices.");
@@ -132,8 +132,13 @@ public class mainview {
     }
 
     public void displaySavedGames(List<String> savedGames) {
-        String out = stringBuilder(savedGames);
-        System.out.println(out);
+        if (savedGames.isEmpty()) {
+            System.out.println("***No saved games yet***");
+        }
+        else {
+            String out = stringBuilder(savedGames);
+            System.out.println(out);
+        }
     }
 
     public void displayRoll(ArrayList<Integer> arrOut) {
@@ -202,8 +207,11 @@ public class mainview {
         else if (in.equals("compactverbose")) {
             System.out.println("Do you want a compact or verbose list?");
         }
-        else if (in.equals("")) {
-
+        else if (in.equals("saved")) {
+            System.out.println("Game saved!");
+        }
+        else if (in.equals("nogames")) {
+            System.out.println("***No saved games yet***");
         }
         else {
             System.out.println("There is no such command available right now.");
