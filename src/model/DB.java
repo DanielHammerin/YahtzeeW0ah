@@ -46,9 +46,9 @@ public class DB implements Serializable{
     }
 
     public boolean GameSave(Game game){
-
+        String s = "saveGame'" + game.name + "'.ser";
         try{
-            FileOutputStream file = new FileOutputStream("savedGame.ser");
+            FileOutputStream file = new FileOutputStream(s);
             ObjectOutputStream out = new ObjectOutputStream(file);
             out.writeObject(game);
             System.out.printf("The data is now saved in savedGame.ser file");

@@ -46,6 +46,8 @@ public class Controller {
         while (true) {
             if (game.isGameOver(game)) {                      //Checks if  the game is over and who won.
                 mv.displayWinner(game.getWinner());
+                saveGame(game);
+                startnewGame();
             }
             else {
                 nRolls = 0;
