@@ -199,6 +199,9 @@ public class mainview {
         else if (in.equals("compactverbose")) {
             System.out.println("Do you want a compact or verbose list?");
         }
+        else if (in.equals("")) {
+
+        }
         else {
             System.out.println("There is no such command available right now.");
         }
@@ -238,5 +241,15 @@ public class mainview {
 
     public void displayPlayersTurn(String name) {
         System.out.println(name + "'s turn to play.");
+    }
+
+    public void displayDate(String s) {
+        System.out.println(s);
+    }
+
+    public void displayCompactList(Game loadedGame) {
+        for (Player p : loadedGame.players) {
+            System.out.println(p.getName() + " Scored " + p.getTotalscore());
+        }
     }
 }

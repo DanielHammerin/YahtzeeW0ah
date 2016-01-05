@@ -5,7 +5,9 @@ import model.Game;
 import model.Player;
 import view.mainview;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 
 
@@ -58,7 +60,7 @@ public class Controller {
                 if (cmd.equals("p")) {              //Reset for the next player.
                     game.increaseRound();           //Increase round number for every cycle of all players.
                     Player p = game.getPlayer();
-                    rollingHand = game.rollNewhand();
+                    rollingHand = game.rollNewhand(); //Just to initialize rollingHand.
                     nRolls++;
                     rolling(game, p);
                 }
@@ -88,14 +90,16 @@ public class Controller {
                 rollingHand = game.rollNewhand();           //RollingHand is an arrayList.
                 nRolls++;
                 rolling(game, p);
-            } else if (nRolls > 0 && nRolls < 4) {
+            }
+            else if (nRolls > 0 && nRolls < 4) {
                 if (nRolls == 3) {                          //If player has rolled 3 times.
                     for (int i : rollingHand) {
                         finalHand[finalArrIndex] = i;
                         finalArrIndex++;
                     }
                     selectCategoryToScore(finalHand, p, game);       //Go to score selection part.
-                } else {
+                }
+                else {
                     //chooseDiceToKeep(game, p);
 
                     mv.displayMessages("choosedicestokeep");
@@ -103,14 +107,13 @@ public class Controller {
 
                     for (char c : in.toCharArray()) {           //For every char in the input string.
                         int x = Character.getNumericValue(c);   //Set x to char value.
-                        outerloop:
                         for (Iterator<Integer> it = rollingHand.iterator(); it.hasNext(); ) {             //Check the rolled hand.
                             int i = it.next();
                             if (x == i) {                       //If x matches any of the numbers rolled.
                                 finalHand[finalArrIndex] = i;   //Put x in the intArray finalHand[]
                                 it.remove();                    //remove it from the arrayList of rolling dices.
                                 finalArrIndex++;                //Increase index in intArray.
-                                break outerloop;
+                                break;
                             }
                         }
                     }
@@ -119,13 +122,15 @@ public class Controller {
 
                 }
             }
-        } else if (cmdIn.equals("s")) {               //If player wants to score.
+        }
+        else if (cmdIn.equals("s")) {               //If player wants to score.
             for (int i : rollingHand) {             //Put all dices to saved hand.
                 finalHand[finalArrIndex] = i;
                 finalArrIndex++;
             }
             selectCategoryToScore(finalHand, p, game);       //Go to score selection part.
-        } else {
+        }
+        else {
             mv.displayMessages("notAvalidInput");
             rolling(game, p);
         }
@@ -160,13 +165,16 @@ public class Controller {
 
         if (checkable && !scoredBefore) {
             g.scoreCategoryInPlayer(cmdIn, p, finalHand);
-        } else if (!scoredBefore) {
+        }
+        else if (!scoredBefore) {
             mv.displayMessages("alreadyscored");
             selectCategoryToScore(finalHand, p, g);
-        } else if (!checkable) {
+        }
+        else if (!checkable) {
             mv.displayMessages("cantscorethere");
             selectCategoryToScore(finalHand, p, g);
-        } else {
+        }
+        else {
             mv.displayMessages("notAvalidInput");
             selectCategoryToScore(finalHand, p, g);
         }
@@ -199,6 +207,7 @@ public class Controller {
             n++;
         }
         newGame.addPlayers(playerList);                        //Add playerList to Game player list.
+        newGame.date = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance());
         commandControll(newGame);                              //Call main program with new game.
     }
 
@@ -224,10 +233,12 @@ public class Controller {
         String s = mv.getInput();
         if (s.equals("v")) {
             int[] temp = {0,0,0,0,0};
+            mv.displayDate(loadedGame.date);
             mv.displayMainScoreBoard(loadedGame.players, loadedGame.possibleCategories(temp));
         }
         else if (s.equals("c")) {
-
+            mv.displayDate(loadedGame.date);
+            mv.displayCompactList(loadedGame);
         }
     }
 

@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Daniel Hammerin on 2015-11-10.
@@ -14,6 +15,7 @@ public class Game {
     ArrayList<Boolean> checkable;
     StandardRules yahtzeeRule = new StandardRules();
     public int rounds;
+    public String date;
 
     public ArrayList<Integer> rollNewhand() {
         ArrayList<Integer> arr = new ArrayList<>();

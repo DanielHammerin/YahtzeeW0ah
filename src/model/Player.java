@@ -155,12 +155,12 @@ public class Player {
         return gameName;
     }
 
-    public ArrayList<Boolean> getPlayerCategories(Player p) {
+    public ArrayList<Boolean> getPlayerCategories(Player p) {                       //Returns an arraylist of booleans with info if a category has been scored
         ArrayList<Boolean> pc = new ArrayList<>();
-        if (p.getOnes() == 0) {
+        if (p.getOnes() == 0) {                                                     //If a category hasn't been scored yet, add false.
             pc.add(false);
         }
-        else {
+        else {                                                                      //If it has been scored, add true.
             pc.add(true);
         }
         if (p.getOnes() == 0) {
