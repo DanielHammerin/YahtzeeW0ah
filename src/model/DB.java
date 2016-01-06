@@ -23,15 +23,16 @@ public class DB implements Serializable{
      * @param game, the member to be saved.
      */
     public static void saveGame(Game game) {
+        Game toRemove = null;
         for (Game g : savedGames) {
             if (g.name.equals(game.name)) {
-                savedGames.remove(g);
-                savedGames.add(game);
-            }
-            else {
-                savedGames.add(game);
+                toRemove = g;
             }
         }
+        if (toRemove != null) {
+            savedGames.remove(toRemove);
+        }
+        savedGames.add(game);
     }
 
     public static Game loadGame(String gameName) {
@@ -39,7 +40,6 @@ public class DB implements Serializable{
         for (Game g : savedGames ) {
             if (g.name.equals(gameName)) {
                 game = g;
-                return game;
             }
         }
         return game;
