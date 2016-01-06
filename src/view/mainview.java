@@ -158,7 +158,7 @@ public class mainview {
     }
 
     public void displayStart() {
-        System.out.println("Start new game? 'n' or Load existing session? 'l'");
+        System.out.println("Start new game? 'n' or Load existing session? 'l' or view finished game 'v'");
     }
 
     public String getInput() {
@@ -207,7 +207,7 @@ public class mainview {
             System.out.println("You have already scored in this category.");
         }
         else if (in.equals("compactverbose")) {
-            System.out.println("Do you want a compact or verbose list?");
+            System.out.println("Do you want a compact 'c' or verbose list 'v'?");
         }
         else if (in.equals("saved")) {
             System.out.println("Game saved!");
