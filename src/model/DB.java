@@ -7,7 +7,11 @@ import java.util.Objects;
 import java.io.*;
 
 /**
- * Contains methods to interact with the data base.
+ * In this class we have created methods to
+ * help with saving the game  as well as loading it. We tried using Serializable
+ * to save the game to a file, but came to the conclusion that using an arraylist
+ * was a much simpler and fail-free solution, specially since we have too little
+ * knowlage in how serializable works.
  * Created by Daniel Hammerin 10-11-2015.
  */
 public class DB implements Serializable{

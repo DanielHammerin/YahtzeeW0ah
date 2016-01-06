@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Markus on 12/11/15.
  *
- * This class creates an instance of Dice
+ * This class creates an instance of Dice.
  */
 public class Dice {
 

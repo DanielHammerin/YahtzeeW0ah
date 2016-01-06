@@ -3,12 +3,14 @@ package model;
 import java.util.ArrayList;
 
 /**
+ * A player class that creates an instance of Player, as well as all the
+ * neccessary variables needed for the dice, as well as the rules needed to score.
  * Created by Daniel Hammerin on 2015-11-10.
  */
 public class Player {
 
     private String name;
-    private String gameName;                                            //Which game the player belongs to.
+    private String gameName;           //Which game the player belongs to.
 
     private int ones;
     private int twos;

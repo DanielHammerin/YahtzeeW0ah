@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
+ * A class that creates an instance of the game with the methods requiered
+ * to add players, get confirmation and check if the game is over.
  * Created by Daniel Hammerin on 2015-11-10.
  */
 public class Game {

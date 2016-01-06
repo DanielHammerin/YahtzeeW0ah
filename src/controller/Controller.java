@@ -12,6 +12,8 @@ import java.util.Iterator;
 
 
 /**
+ * This is the controller class. It connects pretty much everything together
+ * and is responsible for starting the game, rolling, selecting category etc.
  * Created by Daniel Hammerin on 2015-11-10.
  */
 public class Controller {

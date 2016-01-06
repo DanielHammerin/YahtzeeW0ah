@@ -4,7 +4,10 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
+ * This class contains the rules for the standard yahtzee game. This game ends
+ * After 13 rounds and the winner is the player with the highest score.
  * Created by Markus on 12/11/15.
+ *
  */
 public class StandardRules {
 

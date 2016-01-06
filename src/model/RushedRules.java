@@ -3,6 +3,10 @@ package model;
 import java.util.ArrayList;
 
 /**
+ * This class represents the second variant of the game.
+ * The way it works is that it has the same rules as usual yahtzee,
+ * except that the game will end as soon as a player's score reach 200
+ * and that would be the winning player.
  * Created by Markus on 16/11/15.
  */
 public class RushedRules {

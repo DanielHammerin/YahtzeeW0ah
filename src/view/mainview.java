@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
+ * This is the main view class with all the system.outs that will be displayed
+ * as the game starts. 
  * Created by Daniel Hammerin on 2015-11-10.
  */
 public class mainview {
