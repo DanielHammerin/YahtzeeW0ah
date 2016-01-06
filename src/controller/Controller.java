@@ -165,25 +165,28 @@ public class Controller {
 
         mv.displayMessages("choosecat2score");
         String cmdIn = mv.getInput().toLowerCase();
-        boolean checkable = g.getConfirmation(cmdIn, selection);                 //Boolean for if the chosen category is actually pickable.
-        boolean scoredBefore = g.categoryHasBeenScored(p, cmdIn);                    //Boolean for if the cateogry has already been picked.
-
-        if (checkable && !scoredBefore) {
-            g.scoreCategoryInPlayer(cmdIn, p, finalHand);
-        }
-        else if (scoredBefore) {
-            mv.displayMessages("alreadyscored");
-            selectCategoryToScore(finalHand, p, g);
-        }
-        else if (!checkable) {
-            mv.displayMessages("cantscorethere");
-            selectCategoryToScore(finalHand, p, g);
-        }
-        else {
+        if (Integer.parseInt(cmdIn) > 13 || Integer.parseInt(cmdIn) < 1) {
             mv.displayMessages("notAvalidInput");
             selectCategoryToScore(finalHand, p, g);
         }
+        else {
+            boolean checkable = g.getConfirmation(cmdIn, selection);                 //Boolean for if the chosen category is actually pickable.
+            boolean scoredBefore = g.categoryHasBeenScored(p, cmdIn);                    //Boolean for if the cateogry has already been picked.
 
+            if (checkable && !scoredBefore) {
+                g.scoreCategoryInPlayer(cmdIn, p, finalHand);
+                p.setTotalscore();
+            } else if (scoredBefore) {
+                mv.displayMessages("alreadyscored");
+                selectCategoryToScore(finalHand, p, g);
+            } else if (!checkable) {
+                mv.displayMessages("cantscorethere");
+                selectCategoryToScore(finalHand, p, g);
+            } else {
+                mv.displayMessages("notAvalidInput");
+                selectCategoryToScore(finalHand, p, g);
+            }
+        }
     }
 
     /*

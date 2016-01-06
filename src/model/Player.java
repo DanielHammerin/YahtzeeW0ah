@@ -27,7 +27,7 @@ public class Player {
     private int chance;
     private int yahtzee;
 
-    private int totalscore = ones + twos + threes + fours + fives + sixes + threeofakind + fourofakind + fullhouse + smallstraight + largestraight + chance + yahtzee;
+    private int totalscore;
 
     public int getOnes() {
         return ones;
@@ -137,8 +137,8 @@ public class Player {
         return totalscore;
     }
 
-    public void setTotalscore(int totalscore) {
-        this.totalscore += totalscore;
+    public void setTotalscore() {
+        this.totalscore = ones + twos + threes + fours + fives + sixes + threeofakind + fourofakind + fullhouse + smallstraight + largestraight + chance + yahtzee;
     }
 
     public String getName() {
