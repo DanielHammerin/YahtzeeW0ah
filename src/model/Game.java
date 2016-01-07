@@ -78,19 +78,9 @@ public class Game {
     public void scoreCategoryInPlayer(String cmdIn, Player p, int[] finalHand) {
         yahtzeeRule.scoreCategoryInPlayer(cmdIn, p, finalHand);
     }
-    /*
-     * Looks in the players score sheet if the player has scored the category before.
-     */
-    public boolean categoryHasBeenScored(Player p, String cmdIn) {
-        boolean b;
-        ArrayList<Boolean> playerCategories = p.getPlayerCategories(p);
 
-        if (playerCategories.get(Integer.parseInt(cmdIn) - 1)) {
-            b = true;
-        }
-        else {
-            b = false;
-        }
+    public boolean categoryHasBeenScored(Player p, String cmdIn) {
+        boolean b = yahtzeeRule.categoryHasBeenScored(p, cmdIn);
         return b;
     }
 

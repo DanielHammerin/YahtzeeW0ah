@@ -311,6 +311,12 @@ public class RushedRules {
         }
     }
 
+    /*
+     * Looks in the players score sheet if the player has scored the category before.
+     */
+    public boolean categoryHasBeenScored(Player p, String cmdIn) {
+        return false;
+    }
     //Method to check if a player has reached a score of 200, if so then the game is over and the player won
 
     public boolean isGameOver(Game game) {

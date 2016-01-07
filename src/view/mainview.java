@@ -21,6 +21,11 @@ public class mainview {
         System.out.println("Then press 'R' again to re-roll all unselected dices.");
         System.out.println("The players must take turns in rolling.");
     }
+    /*
+     * This method prints the main scored board. It takes in the players, to display their score and the arraylist for
+     * possible categories to score in (booleans), the booleans change the categories from "x" or "o" to
+     * signify if the cetegory is scorable. it also changes for each player and their hand.
+     */
     public void displayMainScoreBoard(ArrayList<Player> playerList, ArrayList<Boolean> categories) {
         /*
          * ArrayLists inside method so they are cleared (new ones made) every time the method is called.
@@ -160,7 +165,12 @@ public class mainview {
     public void displayStart() {
         System.out.println("Start new game? 'n' or Load existing session? 'l' or view finished game 'v'");
     }
-
+    /*
+     * unfortunately, This might be counted as a hidden dependency, but we chose to use a string input
+     * because of the various and different commands and names that might be entered.
+     * We could have used Cases and eliminate string dependency, but having one getInput for names and one for
+     * simple commands felt supurflous really, so we opted for using only this one.
+     */
     public String getInput() {
         Scanner sc = new Scanner(System.in);
         String ret = sc.nextLine();
@@ -170,7 +180,11 @@ public class mainview {
     public void displayWinner(Player winner) {
         System.out.println(winner.getName() + " Won with the total score of: " + winner.getTotalscore());
     }
-
+    /*
+     * Method for various print outs. It takes a relevant phrase when called and prints the appropriate message.
+     * In hindsight, The system.out string could have been written in the controller, the way it should be
+     * printed out, but well.
+     */
     public void displayMessages(String in) {
         if (in.equals("enterNplayers")) {
             System.out.println("Please enter number of players. (1-5)");

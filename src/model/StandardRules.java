@@ -322,6 +322,22 @@ public class StandardRules {
         }
     }
 
+    /*
+     * Looks in the players score sheet if the player has scored the category before.
+     */
+    public boolean categoryHasBeenScored(Player p, String cmdIn) {
+        boolean b;
+        ArrayList<Boolean> playerCategories = p.getPlayerCategories(p);
+
+        if (playerCategories.get(Integer.parseInt(cmdIn) - 1)) {
+            b = true;
+        }
+        else {
+            b = false;
+        }
+        return b;
+    }
+
 
     public boolean isGameOver(Game game) {
 

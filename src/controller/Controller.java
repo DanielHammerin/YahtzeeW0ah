@@ -25,7 +25,9 @@ public class Controller {
     ArrayList<Integer> rollingHand;
     int[] finalHand;
     int finalArrIndex;
-
+    /*
+     * Method for pre game start.
+     */
     public void startNewGame() {
         mv.displayStart();
         String cmd = mv.getInput().toLowerCase();
@@ -43,7 +45,9 @@ public class Controller {
             startNewGame();
         }
     }
-
+    /*
+     * Method for when a game is started. This is the main method for saving, loading or playing a game.
+     */
     public boolean commandControll(Game game) {
         while (true) {
             if (game.isGameOver(game)) {                      //Checks if  the game is over and who won.
@@ -81,7 +85,11 @@ public class Controller {
             }
         }
     }
-
+    /*
+     * When a player chooses to play, the player is sent here to "rolling". The player can choose to roll, score and
+     * save dices. The player is then sent to chose a category to score in.
+     * After scoring the program returns to commandcontroll and the next player can play their round.
+     */
     public void rolling(Game game, Player p) {
         mv.displayPlayersTurn(p.getName());
         mv.displayMainScoreBoard(game.players, game.possibleCategories(finalHand));
@@ -171,7 +179,7 @@ public class Controller {
         }
         else {
             boolean checkable = g.getConfirmation(cmdIn, selection);                 //Boolean for if the chosen category is actually pickable.
-            boolean scoredBefore = g.categoryHasBeenScored(p, cmdIn);                    //Boolean for if the cateogry has already been picked.
+            boolean scoredBefore = g.categoryHasBeenScored(p, cmdIn);                    //Boolean for if the category has already been picked.
 
             if (checkable && !scoredBefore) {
                 g.scoreCategoryInPlayer(cmdIn, p, finalHand);
