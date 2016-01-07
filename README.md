@@ -5,7 +5,8 @@
 HOW TO RUN: In order to launch the application, you will have to clone it using the github link, open the project in your IDE and run the main class that exists in the src folder. (It is outside any other the MVC packages.)
 
 
-WHAT WE DID: Me and daniel implemented the game yahtzee, following the instructions provided in the assignment on the coursepress page. We tried to follow Object Oriented Design as much as we could as well as implement as many requerments as we could. 
+WHAT WE DID: Me and daniel implemented the game yahtzee, following the instructions provided in the assignment on the coursepress page. We tried to follow Object Oriented Design as much as we could as well as implement as many requerments as we could.
+We also looked alot on your implementation of the blackjack game and were inspired of how the game->rule->player relations. So we tried to create our yahtzee to operate in a similar way.
 
 The one requierment we were unable to implement was the computer AI system as we found it too complicated and hard to do, especially considering the time we had to complete this assignment. We had an idea for a simple one, which would check the possible categories and always attempt to either score in the highest scoring category and then move down through the rest. Or simply always score in the first available category. But we chose to focus more on doing our best to complete as many of the other requirements first, which in the end meant that we didn't have enough time to create an AI.
 
