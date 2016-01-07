@@ -5,6 +5,7 @@
 HOW TO RUN: In order to launch the application, you will have to clone it using the github link, open the project in your IDE and run the main class that exists in the src folder. (It is outside any other the MVC packages.)
 
 CLASS DIAGRAM: http://postimg.org/image/epafv84oz/
+
 SEQUENCE DIAGRAM: http://postimg.org/image/pgqosqd1r/ 
 
 DOMAIN MODEL: http://postimg.org/image/qp9lsjl5h/ 
