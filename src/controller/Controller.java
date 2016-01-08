@@ -184,13 +184,16 @@ public class Controller {
             if (checkable && !scoredBefore) {
                 g.scoreCategoryInPlayer(cmdIn, p, finalHand);
                 p.setTotalscore();
-            } else if (scoredBefore) {
+            }
+            else if (scoredBefore) {
                 mv.displayMessages("alreadyscored");
                 selectCategoryToScore(finalHand, p, g);
-            } else if (!checkable) {
+            }
+            else if (!checkable) {
                 mv.displayMessages("cantscorethere");
                 selectCategoryToScore(finalHand, p, g);
-            } else {
+            }
+            else {
                 mv.displayMessages("notAvalidInput");
                 selectCategoryToScore(finalHand, p, g);
             }
