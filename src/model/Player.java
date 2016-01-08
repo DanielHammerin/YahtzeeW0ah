@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * A player class that creates an instance of Player, as well as all the
- * neccessary variables needed for the dice, as well as the rules needed to score.
+ * necessary variables needed for the dice, and the rules needed to score.
  * Created by Daniel Hammerin on 2015-11-10.
  */
 public class Player {
