@@ -15,7 +15,7 @@ public class Game {
     public ArrayList<Player> players = new ArrayList<>();
     int playerListIndex;
     ArrayList<Boolean> checkable;
-    StandardRules yahtzeeRule = new StandardRules();
+    StandardRules yahtzeeRule = new StandardRules();                            //This is the rule. It can be changed to be an instance of another rule. ex. RushedRules.
     public int rounds;
     public String date;
 
