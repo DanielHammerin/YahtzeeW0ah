@@ -14,6 +14,7 @@ public class StandardRules {
     private int score;
     private int roundNumber;
 
+/*
     public int getRoundNumber() {
         return roundNumber;
     }
@@ -26,7 +27,7 @@ public class StandardRules {
         return score;
     }
 
-
+*/
     //Method for checking which categories are scorable.
 
     public ArrayList<Boolean> getCategories(int[] finalHand) {
@@ -38,8 +39,8 @@ public class StandardRules {
                 categories.add(false);
                 n++;
             }
-            return categories;
-        } else {
+        }
+        else {
             categories.add(Ones(finalHand));                                   //Adding them to the return list.
             categories.add(Twos(finalHand));
             categories.add(Threes(finalHand));
@@ -54,8 +55,8 @@ public class StandardRules {
             categories.add(Chance(finalHand));
             categories.add(Yahtzee(finalHand));
 
-            return categories;
         }
+        return categories;
     }
 
     public int[] Sort(int[] dice) {             //Takes in final hand of dices.

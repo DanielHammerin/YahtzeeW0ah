@@ -66,14 +66,7 @@ public class Game {
     }
 
     public boolean getConfirmation(String cmdIn, ArrayList<Boolean> selection) {                //Ensure that the category is pickable.
-        boolean b;
-        if (selection.get(Integer.parseInt(cmdIn) - 1)) {                                   //From the list of booleans, check the one that the player wanted.
-            b = true;
-        }
-        else {
-            b = false;
-        }
-        return b;
+        return selection.get(Integer.parseInt(cmdIn) - 1);
     }
 
     public void scoreCategoryInPlayer(String cmdIn, Player p, int[] finalHand) {
