@@ -11,7 +11,8 @@ import java.io.*;
  * help with saving the game  as well as loading it. We tried using Serializable
  * to save the game to a file, but came to the conclusion that using an arraylist
  * was a much simpler and fail-free solution, specially since we have too little
- * knowlage in how serializable works.
+ * knowledge in how serializable works.
+ * This however means that saving and loading can only be done as long as the program is executing.
  * Created by Daniel Hammerin 10-11-2015.
  */
 public class DB implements Serializable{
